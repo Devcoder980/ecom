@@ -17,7 +17,7 @@ export interface FieldDefinition {
     custom?: string;
   };
   ui?: {
-    inputType?: 'text' | 'password' | 'email' | 'tel' | 'url' | 'number' | 'date' | 'datetime-local' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file';
+    inputType?: 'text' | 'password' | 'email' | 'tel' | 'url' | 'number' | 'date' | 'datetime-local' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'image' | 'document';
     rows?: number;
     cols?: number;
     step?: number;
@@ -85,7 +85,7 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
       { name: 'name', type: 'string', label: 'Category Name', required: true, placeholder: 'Enter category name', searchable: true, sortable: true, display: true },
       { name: 'slug', type: 'string', label: 'URL Slug', required: true, placeholder: 'category-slug', searchable: true, sortable: true, display: true },
       { name: 'description', type: 'text', label: 'Description', required: false, placeholder: 'Category description', ui: { inputType: 'textarea', rows: 3 } },
-      { name: 'image_url', type: 'url', label: 'Image URL', required: false, placeholder: 'https://example.com/image.jpg' },
+      { name: 'image_url', type: 'file', label: 'Category Image', required: false, ui: { inputType: 'image', accept: 'image/*' } },
       { name: 'meta_title', type: 'string', label: 'Meta Title', required: false, placeholder: 'SEO title', seo: true },
       { name: 'meta_description', type: 'text', label: 'Meta Description', required: false, placeholder: 'SEO description', ui: { inputType: 'textarea', rows: 2 }, seo: true },
       { name: 'meta_keywords', type: 'string', label: 'Meta Keywords', required: false, placeholder: 'keyword1, keyword2', seo: true },
@@ -209,7 +209,7 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
       { name: 'slug', type: 'string', label: 'URL Slug', required: true, placeholder: 'blog-post-slug', searchable: true, sortable: true, display: true },
       { name: 'excerpt', type: 'text', label: 'Excerpt', required: false, placeholder: 'Brief description', ui: { inputType: 'textarea', rows: 3 } },
       { name: 'content', type: 'text', label: 'Content', required: true, placeholder: 'Blog post content', ui: { inputType: 'textarea', rows: 10 } },
-      { name: 'featured_image', type: 'url', label: 'Featured Image', required: false, placeholder: 'https://example.com/image.jpg' },
+      { name: 'featured_image', type: 'file', label: 'Featured Image', required: false, ui: { inputType: 'image', accept: 'image/*' } },
       { name: 'author_id', type: 'string', label: 'Author', required: false, placeholder: 'Select author' },
       { name: 'meta_title', type: 'string', label: 'Meta Title', required: false, placeholder: 'SEO title', seo: true },
       { name: 'meta_description', type: 'text', label: 'Meta Description', required: false, placeholder: 'SEO description', ui: { inputType: 'textarea', rows: 2 }, seo: true },
@@ -394,8 +394,8 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
       // Basic Details
       { name: 'name', type: 'string', label: 'Company Name', required: true, placeholder: 'Your Company Name', searchable: true, sortable: true, display: true },
       { name: 'legal_name', type: 'string', label: 'Legal Name', required: false, placeholder: 'Legal Company Name Pvt Ltd', searchable: true },
-      { name: 'logo_url', type: 'url', label: 'Logo URL', required: false, placeholder: 'https://example.com/logo.png' },
-      { name: 'favicon_url', type: 'url', label: 'Favicon URL', required: false, placeholder: 'https://example.com/favicon.ico' },
+      { name: 'logo_url', type: 'file', label: 'Logo', required: false, ui: { inputType: 'image', accept: 'image/*' } },
+      { name: 'favicon_url', type: 'file', label: 'Favicon', required: false, ui: { inputType: 'image', accept: 'image/*' } },
       { name: 'tagline', type: 'string', label: 'Tagline', required: false, placeholder: 'Your Company Tagline', searchable: true },
       { name: 'description', type: 'text', label: 'Company Description', required: false, placeholder: 'Brief company description', ui: { inputType: 'textarea', rows: 4 } },
       

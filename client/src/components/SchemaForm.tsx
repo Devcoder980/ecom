@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FieldDefinition, TableDefinition } from '../../types/schema';
+import FileUpload from './FileUpload';
 
 interface SchemaFormProps {
   tableName: string;
@@ -192,6 +193,23 @@ const SchemaForm: React.FC<SchemaFormProps> = ({
             />
             {field.label}
           </label>
+          {error && <div className="field-error">{error}</div>}
+        </div>
+      );
+    }
+
+    if (field.type === 'file') {
+      return (
+        <div key={field.name} className="form-group">
+          <FileUpload
+            fieldName={field.name}
+            value={value}
+            onChange={(fileUrl) => handleInputChange(field.name, fileUrl)}
+            accept={field.ui?.accept}
+            multiple={field.ui?.multiple}
+            label={field.label}
+            required={field.required}
+          />
           {error && <div className="field-error">{error}</div>}
         </div>
       );

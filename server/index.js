@@ -2,6 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import multer from "multer";
+import path from "path";
+import fs from "fs";
 import { DATABASE_SCHEMA, getTableDefinition } from "../shared/database-schema.js";
 
 dotenv.config();
@@ -9,6 +12,47 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Create uploads directory if it doesn't exist
+const uploadsDir = 'uploads';
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const fieldName = file.fieldname;
+    const uploadPath = path.join(uploadsDir, fieldName);
+    
+    // Create subdirectory for each field type
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+    
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    // Generate unique filename
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const ext = path.extname(file.originalname);
+    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    // Allow all file types for now, can be restricted later
+    cb(null, true);
+  }
+});
+
+// Serve static files
+app.use('/uploads', express.static('uploads'));
 
 // 🔗 MongoDB connect
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce_admin";
@@ -100,6 +144,52 @@ function getModel(collectionName) {
   }
   return models[collectionName];
 }
+
+// 📁 File Upload Endpoint
+app.post("/api/upload/:fieldName", upload.single('file'), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    
+    const fileUrl = `/uploads/${req.file.fieldname}/${req.file.filename}`;
+    
+    res.json({
+      success: true,
+      fileUrl: fileUrl,
+      filename: req.file.filename,
+      originalName: req.file.originalname,
+      size: req.file.size,
+      mimetype: req.file.mimetype
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📁 Multiple File Upload Endpoint
+app.post("/api/upload-multiple/:fieldName", upload.array('files', 10), (req, res) => {
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: 'No files uploaded' });
+    }
+    
+    const files = req.files.map(file => ({
+      fileUrl: `/uploads/${file.fieldname}/${file.filename}`,
+      filename: file.filename,
+      originalName: file.originalname,
+      size: file.size,
+      mimetype: file.mimetype
+    }));
+    
+    res.json({
+      success: true,
+      files: files
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // 🟢 Create
 app.post("/api/:collection", async (req, res) => {

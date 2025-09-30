@@ -7,6 +7,7 @@ A comprehensive admin dashboard for e-commerce management built with **Schema-Dr
 - **Single Source of Truth** - One schema file defines everything
 - **Automatic Form Generation** - Forms are generated from schema definition
 - **Dynamic Validation** - Client and server validation from schema
+- **File Upload Support** - Automatic file upload handling
 - **Type-Safe Development** - Full TypeScript support
 - **SEO-Optimized Fields** - Built-in SEO field management
 - **No Code Duplication** - Add new tables without writing forms
@@ -65,8 +66,39 @@ export const DATABASE_SCHEMA = {
 - **Form Generation** - Forms created from schema
 - **Validation** - Client & server validation
 - **Field Types** - Input types determined automatically
+- **File Upload** - Automatic file upload handling
 - **SEO Fields** - Special handling for SEO fields
 - **Relationships** - Table relationships defined in schema
+
+## 📁 **File Upload System**
+
+### Backend Features
+- **Multer Integration** - File upload middleware
+- **Automatic Directory Creation** - Organized file storage
+- **File Size Limits** - Configurable size restrictions
+- **File Type Validation** - Accept specific file types
+- **Unique Filenames** - Prevent filename conflicts
+
+### Frontend Features
+- **Drag & Drop Interface** - User-friendly upload
+- **Image Preview** - Automatic image preview
+- **Progress Indicators** - Upload progress feedback
+- **File Validation** - Client-side validation
+- **Multiple File Support** - Upload multiple files
+
+### File Upload Example
+```typescript
+// Schema definition with file upload
+{
+  name: 'logo_url',
+  type: 'file',
+  label: 'Company Logo',
+  ui: {
+    inputType: 'image',
+    accept: 'image/*'
+  }
+}
+```
 
 ## Tech Stack
 
