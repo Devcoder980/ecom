@@ -397,3 +397,267 @@ body {
   border-radius: 4px;
   margin-bottom: 1rem;
 }
+
+/* Form Styles */
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-checkbox {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+.form-file {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+}
+
+.required {
+  color: #e74c3c;
+  margin-left: 0.25rem;
+}
+
+/* File Upload Styles */
+.file-upload-container {
+  position: relative;
+}
+
+.uploading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3498db;
+  font-weight: 500;
+}
+
+.file-preview {
+  margin-top: 0.5rem;
+}
+
+.file-preview-image {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.file-preview-text {
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #666;
+  word-break: break-all;
+}
+
+/* Multiple Files Styles */
+.multiple-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.file-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  min-width: 100px;
+}
+
+.file-item .file-preview-image {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.file-item .file-preview-text {
+  font-size: 0.7rem;
+  margin-top: 0.25rem;
+  text-align: center;
+  padding: 0.25rem;
+}
+
+/* Schema Manager Styles */
+.schema-manager {
+  padding: 20px;
+}
+
+.schema-manager .table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.schema-manager .table-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.schema-manager .table-header .btn {
+  margin-left: 10px;
+}
+
+.field-config {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+  background: #f8f9fa;
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.field-row input,
+.field-row select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.field-row label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status.active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.inactive {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Schema Manager Table Styles */
+.schema-manager .data-table {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.schema-manager .table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schema-manager .table th {
+  background: #f8f9fa;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.schema-manager .table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.schema-manager .table tr:hover {
+  background: #f8f9fa;
+}
+
+.schema-manager .table-actions-cell {
+  white-space: nowrap;
+}
+
+.schema-manager .table-actions-cell .btn {
+  margin-right: 8px;
+}
+
+.schema-manager .table-actions-cell .btn:last-child {
+  margin-right: 0;
+}
+
+.schema-manager .table-actions-cell .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Enhanced Modal Styles */
+.modal {
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.modal .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Responsive Form */
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    max-width: none;
+    margin: 1rem;
+  }
+  
+  .form-input,
+  .form-textarea,
+  .form-select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
