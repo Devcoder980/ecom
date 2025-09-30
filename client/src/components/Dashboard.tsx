@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { DATABASE_SCHEMA } from '../../types/schema';
 
 interface TableStats {
   total: number;
@@ -16,24 +17,7 @@ const Dashboard: React.FC = () => {
   const [stats, setStats] = useState<DashboardStats>({});
   const [loading, setLoading] = useState(true);
 
-  const tables = [
-    { name: 'users', label: 'Users', description: 'Manage user accounts and permissions' },
-    { name: 'categories', label: 'Categories', description: 'Product categories and SEO settings' },
-    { name: 'products', label: 'Products', description: 'Product catalog with variants and SEO' },
-    { name: 'customers', label: 'Customers', description: 'Customer information and profiles' },
-    { name: 'orders', label: 'Orders', description: 'Order management and tracking' },
-    { name: 'blog_posts', label: 'Blog Posts', description: 'Content management and SEO' },
-    { name: 'cms_pages', label: 'CMS Pages', description: 'Static pages and content' },
-    { name: 'reviews', label: 'Reviews', description: 'Customer reviews and testimonials' },
-    { name: 'inquiries', label: 'Inquiries', description: 'Customer inquiries and support' },
-    { name: 'newsletter_subscribers', label: 'Newsletter', description: 'Email subscribers' },
-    { name: 'coupons', label: 'Coupons', description: 'Discount codes and promotions' },
-    { name: 'banners', label: 'Banners', description: 'Homepage banners and sliders' },
-    { name: 'menus', label: 'Menus', description: 'Navigation menu management' },
-    { name: 'media', label: 'Media', description: 'File and image management' },
-    { name: 'settings', label: 'Settings', description: 'System configuration' },
-    { name: 'company_info', label: 'Company Info', description: 'Business information' }
-  ];
+  const tables = Object.values(DATABASE_SCHEMA);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -113,7 +97,7 @@ const Dashboard: React.FC = () => {
           
           return (
             <div key={table.name} className="table-card">
-              <h3>{table.label}</h3>
+              <h3>{table.icon} {table.label}</h3>
               <p>{table.description}</p>
               <div style={{ marginBottom: '1rem', fontSize: '0.9rem', color: '#7f8c8d' }}>
                 <div>Total: {tableStats.total}</div>

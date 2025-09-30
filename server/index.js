@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import { DATABASE_SCHEMA, getTableDefinition } from "../shared/database-schema.js";
 
 dotenv.config();
 
@@ -16,6 +17,76 @@ console.log("✅ Connected to MongoDB");
 
 // Cache for dynamic models
 const models = {};
+
+// Schema validation function
+function validateData(tableName, data) {
+  const tableDef = getTableDefinition(tableName);
+  if (!tableDef) {
+    throw new Error(`Table ${tableName} not found in schema`);
+  }
+
+  const errors = [];
+  
+  for (const field of tableDef.fields) {
+    const value = data[field.name];
+    
+    // Required field validation
+    if (field.required && (value === undefined || value === null || value === '')) {
+      errors.push(`${field.label} is required`);
+      continue;
+    }
+    
+    // Skip validation if field is not provided and not required
+    if (value === undefined || value === null || value === '') {
+      continue;
+    }
+    
+    // Type validation
+    switch (field.type) {
+      case 'email':
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          errors.push(`${field.label} must be a valid email`);
+        }
+        break;
+      case 'url':
+        try {
+          new URL(value);
+        } catch {
+          errors.push(`${field.label} must be a valid URL`);
+        }
+        break;
+      case 'number':
+        if (isNaN(Number(value))) {
+          errors.push(`${field.label} must be a number`);
+        } else {
+          const numValue = Number(value);
+          if (field.validation?.min !== undefined && numValue < field.validation.min) {
+            errors.push(`${field.label} must be at least ${field.validation.min}`);
+          }
+          if (field.validation?.max !== undefined && numValue > field.validation.max) {
+            errors.push(`${field.label} must be at most ${field.validation.max}`);
+          }
+        }
+        break;
+      case 'boolean':
+        if (typeof value !== 'boolean' && value !== 'true' && value !== 'false') {
+          errors.push(`${field.label} must be true or false`);
+        }
+        break;
+    }
+    
+    // Pattern validation
+    if (field.validation?.pattern && !new RegExp(field.validation.pattern).test(value)) {
+      errors.push(`${field.label} format is invalid`);
+    }
+  }
+  
+  if (errors.length > 0) {
+    throw new Error(`Validation errors: ${errors.join(', ')}`);
+  }
+  
+  return true;
+}
 
 function getModel(collectionName) {
   if (!models[collectionName]) {
@@ -34,6 +105,10 @@ function getModel(collectionName) {
 app.post("/api/:collection", async (req, res) => {
   try {
     const { collection } = req.params;
+    
+    // Validate data against schema
+    validateData(collection, req.body);
+    
     const Model = getModel(collection);
     const doc = new Model(req.body);
     await doc.save();
@@ -104,6 +179,10 @@ app.get("/api/:collection/:id", async (req, res) => {
 app.put("/api/:collection/:id", async (req, res) => {
   try {
     const { collection, id } = req.params;
+    
+    // Validate data against schema
+    validateData(collection, req.body);
+    
     const Model = getModel(collection);
     const doc = await Model.findByIdAndUpdate(id, req.body, { new: true });
     if (!doc) {
@@ -144,6 +223,29 @@ app.get("/api/:collection/stats", async (req, res) => {
       active,
       inactive
     });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Get schema definition
+app.get("/api/schema/:collection", (req, res) => {
+  try {
+    const { collection } = req.params;
+    const tableDef = getTableDefinition(collection);
+    if (!tableDef) {
+      return res.status(404).json({ error: "Table not found in schema" });
+    }
+    res.json({ success: true, data: tableDef });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Get all schemas
+app.get("/api/schema", (req, res) => {
+  try {
+    res.json({ success: true, data: DATABASE_SCHEMA });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

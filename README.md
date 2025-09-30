@@ -1,6 +1,15 @@
-# E-commerce Admin Dashboard
+# E-commerce Admin Dashboard - Schema-Driven UI
 
-A comprehensive admin dashboard for e-commerce management built with React + TypeScript frontend and Node.js + MongoDB backend.
+A comprehensive admin dashboard for e-commerce management built with **Schema-Driven UI** approach using React + TypeScript frontend and Node.js + MongoDB backend.
+
+## 🎯 **Schema-Driven UI Features**
+
+- **Single Source of Truth** - One schema file defines everything
+- **Automatic Form Generation** - Forms are generated from schema definition
+- **Dynamic Validation** - Client and server validation from schema
+- **Type-Safe Development** - Full TypeScript support
+- **SEO-Optimized Fields** - Built-in SEO field management
+- **No Code Duplication** - Add new tables without writing forms
 
 ## Features
 
@@ -10,27 +19,54 @@ A comprehensive admin dashboard for e-commerce management built with React + Typ
 - **Responsive Admin Dashboard** with HTML/CSS styling (no Tailwind)
 - **Real-time Statistics** and overview
 - **Search and Pagination** for all tables
-- **Modal-based Forms** for create/edit operations
+- **Schema-Driven Forms** - Automatically generated from schema
 
-## Database Tables Included
+## 🗄️ **Database Tables Included**
 
-- Users & Authentication
-- Categories with SEO fields
-- Products with variants and SEO
-- Customers & Addresses
-- Orders & Order Items
-- Blog Posts & Categories
-- CMS Pages
-- Reviews & Testimonials
-- Inquiries & Quote Requests
-- Newsletter Subscribers
-- Coupons & Discounts
-- Banners & Sliders
-- Navigation Menus
-- Media Library
-- Settings & Company Info
-- SEO Meta Overrides
-- Activity Logs
+- **Users & Authentication** - User management with roles
+- **Categories** - Product categories with full SEO support
+- **Products** - Product catalog with variants and SEO
+- **Customers & Addresses** - Customer information management
+- **Orders & Order Items** - Order processing and tracking
+- **Blog Posts & Categories** - Content management with SEO
+- **CMS Pages** - Static pages with SEO optimization
+- **Reviews & Testimonials** - Customer feedback system
+- **Inquiries & Quote Requests** - Lead management
+- **Newsletter Subscribers** - Email marketing
+- **Coupons & Discounts** - Promotion management
+- **Banners & Sliders** - Homepage content
+- **Navigation Menus** - Site navigation
+- **Media Library** - File management
+- **Settings & Company Info** - System configuration
+- **SEO Meta Overrides** - Advanced SEO control
+- **Activity Logs** - Audit trail
+
+## 🔧 **Schema-Driven Architecture**
+
+### Single Schema File (`shared/database-schema.ts`)
+```typescript
+export const DATABASE_SCHEMA = {
+  users: {
+    name: 'users',
+    label: 'Users',
+    description: 'User accounts and authentication',
+    fields: [
+      { name: 'name', type: 'string', label: 'Full Name', required: true },
+      { name: 'email', type: 'email', label: 'Email', required: true },
+      { name: 'role', type: 'select', label: 'Role', options: [...] },
+      // ... more fields
+    ]
+  }
+  // ... more tables
+};
+```
+
+### Automatic Features
+- **Form Generation** - Forms created from schema
+- **Validation** - Client & server validation
+- **Field Types** - Input types determined automatically
+- **SEO Fields** - Special handling for SEO fields
+- **Relationships** - Table relationships defined in schema
 
 ## Tech Stack
 

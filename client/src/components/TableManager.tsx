@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import SchemaForm from './SchemaForm';
+import { DATABASE_SCHEMA } from '../../types/schema';
 
 interface TableData {
   _id: string;
@@ -26,40 +28,8 @@ const TableManager: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState<'create' | 'edit'>('create');
   const [selectedItem, setSelectedItem] = useState<TableData | null>(null);
-  const [formData, setFormData] = useState<Record<string, any>>({});
 
-  const tables = [
-    { name: 'users', label: 'Users' },
-    { name: 'categories', label: 'Categories' },
-    { name: 'products', label: 'Products' },
-    { name: 'product_images', label: 'Product Images' },
-    { name: 'product_attributes', label: 'Product Attributes' },
-    { name: 'product_attribute_values', label: 'Attribute Values' },
-    { name: 'product_variants', label: 'Product Variants' },
-    { name: 'customers', label: 'Customers' },
-    { name: 'addresses', label: 'Addresses' },
-    { name: 'orders', label: 'Orders' },
-    { name: 'order_items', label: 'Order Items' },
-    { name: 'cms_pages', label: 'CMS Pages' },
-    { name: 'blog_posts', label: 'Blog Posts' },
-    { name: 'blog_categories', label: 'Blog Categories' },
-    { name: 'blog_post_categories', label: 'Blog Post Categories' },
-    { name: 'url_redirects', label: 'URL Redirects' },
-    { name: 'sitemap_urls', label: 'Sitemap URLs' },
-    { name: 'reviews', label: 'Reviews' },
-    { name: 'faqs', label: 'FAQs' },
-    { name: 'inquiries', label: 'Inquiries' },
-    { name: 'quote_requests', label: 'Quote Requests' },
-    { name: 'newsletter_subscribers', label: 'Newsletter Subscribers' },
-    { name: 'coupons', label: 'Coupons' },
-    { name: 'banners', label: 'Banners' },
-    { name: 'menus', label: 'Menus' },
-    { name: 'media', label: 'Media' },
-    { name: 'settings', label: 'Settings' },
-    { name: 'company_info', label: 'Company Info' },
-    { name: 'seo_meta_overrides', label: 'SEO Meta Overrides' },
-    { name: 'activity_logs', label: 'Activity Logs' }
-  ];
+  const tables = Object.values(DATABASE_SCHEMA);
 
   useEffect(() => {
     const table = searchParams.get('table');
@@ -128,14 +98,12 @@ const TableManager: React.FC = () => {
   const handleCreate = () => {
     setModalMode('create');
     setSelectedItem(null);
-    setFormData({});
     setShowModal(true);
   };
 
   const handleEdit = (item: TableData) => {
     setModalMode('edit');
     setSelectedItem(item);
-    setFormData({ ...item });
     setShowModal(true);
   };
 
@@ -152,9 +120,7 @@ const TableManager: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const handleSubmit = async (formData: Record<string, any>) => {
     try {
       if (modalMode === 'create') {
         await axios.post(`http://localhost:5000/api/${currentTable}`, formData);
@@ -167,10 +133,6 @@ const TableManager: React.FC = () => {
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to save item');
     }
-  };
-
-  const handleInputChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const getTableColumns = () => {
@@ -301,32 +263,16 @@ const TableManager: React.FC = () => {
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>{modalMode === 'create' ? 'Create New' : 'Edit'} {tables.find(t => t.name === currentTable)?.label}</h3>
               <button className="close-btn" onClick={() => setShowModal(false)}>×</button>
             </div>
             
-            <form onSubmit={handleSubmit}>
-              {getTableColumns().map(column => (
-                <div key={column} className="form-group">
-                  <label htmlFor={column}>{column}</label>
-                  <input
-                    id={column}
-                    type="text"
-                    value={formData[column] || ''}
-                    onChange={(e) => handleInputChange(column, e.target.value)}
-                  />
-                </div>
-              ))}
-              
-              <div className="form-actions">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
-                  Cancel
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  {modalMode === 'create' ? 'Create' : 'Update'}
-                </button>
-              </div>
-            </form>
+            <SchemaForm
+              tableName={currentTable}
+              initialData={selectedItem || {}}
+              onSubmit={handleSubmit}
+              onCancel={() => setShowModal(false)}
+              mode={modalMode}
+            />
           </div>
         </div>
       )}
