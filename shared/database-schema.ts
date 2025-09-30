@@ -449,6 +449,140 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
       { name: 'updated_at', type: 'date', label: 'Updated At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
     ],
     permissions: { create: true, read: true, update: true, delete: true }
+  },
+
+  // ============================================
+  // ADDITIONAL MISSING TABLES
+  // ============================================
+
+  cart: {
+    name: 'cart',
+    label: 'Shopping Cart',
+    description: 'User shopping cart management',
+    icon: '🛒',
+    fields: [
+      { name: 'user_id', type: 'string', label: 'User ID', required: false, placeholder: 'Select user' },
+      { name: 'session_id', type: 'string', label: 'Session ID', required: false, placeholder: 'Guest session ID' },
+      { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true },
+      { name: 'updated_at', type: 'date', label: 'Updated At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
+    ],
+    permissions: { create: true, read: true, update: true, delete: true }
+  },
+
+  cart_items: {
+    name: 'cart_items',
+    label: 'Cart Items',
+    description: 'Items in shopping cart',
+    icon: '🛍️',
+    fields: [
+      { name: 'cart_id', type: 'string', label: 'Cart ID', required: true, placeholder: 'Select cart' },
+      { name: 'product_id', type: 'string', label: 'Product', required: true, placeholder: 'Select product' },
+      { name: 'variant_id', type: 'string', label: 'Variant', required: false, placeholder: 'Select variant' },
+      { name: 'quantity', type: 'number', label: 'Quantity', required: true, defaultValue: 1, ui: { inputType: 'number', min: 1 }, sortable: true, display: true },
+      { name: 'price_at_addition', type: 'number', label: 'Price at Addition', required: true, placeholder: '0.00', ui: { inputType: 'number', step: 0.01 }, sortable: true },
+      { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
+    ],
+    permissions: { create: true, read: true, update: true, delete: true }
+  },
+
+  testimonials: {
+    name: 'testimonials',
+    label: 'Testimonials',
+    description: 'Customer testimonials and reviews',
+    icon: '💬',
+    fields: [
+      { name: 'customer_name', type: 'string', label: 'Customer Name', required: true, placeholder: 'Customer name', searchable: true, sortable: true, display: true },
+      { name: 'company_name', type: 'string', label: 'Company Name', required: false, placeholder: 'Company name', searchable: true },
+      { name: 'testimonial_text', type: 'text', label: 'Testimonial', required: true, placeholder: 'Customer testimonial', ui: { inputType: 'textarea', rows: 4 } },
+      { name: 'rating', type: 'number', label: 'Rating', required: true, placeholder: '5', ui: { inputType: 'number', min: 1, max: 5 }, sortable: true, display: true },
+      { name: 'image_url', type: 'url', label: 'Customer Image', required: false, placeholder: 'https://example.com/customer.jpg' },
+      { name: 'is_approved', type: 'boolean', label: 'Approved', required: true, defaultValue: false, ui: { inputType: 'checkbox' }, sortable: true, display: true },
+      { name: 'display_order', type: 'number', label: 'Display Order', required: true, defaultValue: 0, ui: { inputType: 'number' }, sortable: true },
+      { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
+    ],
+    permissions: { create: true, read: true, update: true, delete: true }
+  },
+
+  pages: {
+    name: 'pages',
+    label: 'Static Pages',
+    description: 'Static pages like About Us, Contact Us',
+    icon: '📄',
+    fields: [
+      { name: 'page_title', type: 'string', label: 'Page Title', required: true, placeholder: 'Page title', searchable: true, sortable: true, display: true },
+      { name: 'slug', type: 'string', label: 'URL Slug', required: true, placeholder: 'about-us', searchable: true, sortable: true, display: true },
+      { name: 'content', type: 'text', label: 'Page Content', required: true, placeholder: 'Page content', ui: { inputType: 'textarea', rows: 10 } },
+      { name: 'meta_description', type: 'text', label: 'Meta Description', required: false, placeholder: 'SEO description', ui: { inputType: 'textarea', rows: 2 }, seo: true },
+      { name: 'is_active', type: 'boolean', label: 'Active', required: true, defaultValue: true, ui: { inputType: 'checkbox' }, sortable: true, display: true },
+      { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true },
+      { name: 'updated_at', type: 'date', label: 'Updated At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
+    ],
+    permissions: { create: true, read: true, update: true, delete: true }
+  },
+
+  wishlists: {
+    name: 'wishlists',
+    label: 'Wishlists',
+    description: 'User wishlist management',
+    icon: '❤️',
+    fields: [
+      { name: 'user_id', type: 'string', label: 'User', required: true, placeholder: 'Select user' },
+      { name: 'product_id', type: 'string', label: 'Product', required: true, placeholder: 'Select product' },
+      { name: 'added_at', type: 'date', label: 'Added At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
+    ],
+    permissions: { create: true, read: true, update: true, delete: true }
+  },
+
+  product_reviews: {
+    name: 'product_reviews',
+    label: 'Product Reviews',
+    description: 'Product reviews and ratings',
+    icon: '⭐',
+    fields: [
+      { name: 'product_id', type: 'string', label: 'Product', required: true, placeholder: 'Select product' },
+      { name: 'user_id', type: 'string', label: 'User', required: false, placeholder: 'Select user' },
+      { name: 'rating', type: 'number', label: 'Rating', required: true, placeholder: '5', ui: { inputType: 'number', min: 1, max: 5 }, sortable: true, display: true },
+      { name: 'review_text', type: 'text', label: 'Review', required: true, placeholder: 'Write your review', ui: { inputType: 'textarea', rows: 4 } },
+      { name: 'is_approved', type: 'boolean', label: 'Approved', required: true, defaultValue: false, ui: { inputType: 'checkbox' }, sortable: true, display: true },
+      { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
+    ],
+    permissions: { create: true, read: true, update: true, delete: true }
+  },
+
+  shipping_methods: {
+    name: 'shipping_methods',
+    label: 'Shipping Methods',
+    description: 'Available shipping methods and rates',
+    icon: '🚚',
+    fields: [
+      { name: 'method_name', type: 'string', label: 'Method Name', required: true, placeholder: 'Standard Shipping', searchable: true, sortable: true, display: true },
+      { name: 'cost', type: 'number', label: 'Cost', required: true, placeholder: '0.00', ui: { inputType: 'number', step: 0.01 }, sortable: true, display: true },
+      { name: 'estimated_days', type: 'number', label: 'Estimated Days', required: true, placeholder: '3', ui: { inputType: 'number', min: 1 }, sortable: true },
+      { name: 'is_active', type: 'boolean', label: 'Active', required: true, defaultValue: true, ui: { inputType: 'checkbox' }, sortable: true, display: true },
+      { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
+    ],
+    permissions: { create: true, read: true, update: true, delete: true }
+  },
+
+  payment_transactions: {
+    name: 'payment_transactions',
+    label: 'Payment Transactions',
+    description: 'Payment transaction records',
+    icon: '💳',
+    fields: [
+      { name: 'order_id', type: 'string', label: 'Order', required: true, placeholder: 'Select order' },
+      { name: 'payment_method', type: 'string', label: 'Payment Method', required: true, placeholder: 'Credit Card', searchable: true, sortable: true, display: true },
+      { name: 'transaction_status', type: 'select', label: 'Status', required: true, options: [
+        { value: 'pending', label: 'Pending' },
+        { value: 'completed', label: 'Completed' },
+        { value: 'failed', label: 'Failed' },
+        { value: 'refunded', label: 'Refunded' }
+      ], sortable: true, display: true },
+      { name: 'amount', type: 'number', label: 'Amount', required: true, placeholder: '0.00', ui: { inputType: 'number', step: 0.01 }, sortable: true, display: true },
+      { name: 'transaction_date', type: 'date', label: 'Transaction Date', required: false, ui: { inputType: 'datetime-local' }, sortable: true },
+      { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
+    ],
+    permissions: { create: true, read: true, update: true, delete: true }
   }
 };
 
