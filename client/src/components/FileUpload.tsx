@@ -39,6 +39,29 @@ const FileUpload: React.FC<FileUploadProps> = ({
       return;
     }
 
+    // Validate file type if accept is specified
+    if (accept && accept !== '*/*') {
+      const allowedTypes = accept.split(',').map(type => type.trim());
+      const fileType = file.type;
+      const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase();
+      
+      const isAllowed = allowedTypes.some(type => {
+        if (type.startsWith('.')) {
+          return type === fileExtension;
+        } else if (type.includes('/*')) {
+          const baseType = type.split('/')[0];
+          return fileType.startsWith(baseType + '/');
+        } else {
+          return fileType === type;
+        }
+      });
+      
+      if (!isAllowed) {
+        setError(`File type not allowed. Allowed types: ${accept}`);
+        return;
+      }
+    }
+
     setUploading(true);
     setError(null);
 
@@ -75,7 +98,22 @@ const FileUpload: React.FC<FileUploadProps> = ({
     }
   };
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
+    if (value && value.startsWith('/uploads/')) {
+      try {
+        // Extract filename from URL
+        const filename = value.split('/').pop();
+        const fieldName = value.split('/')[2];
+        
+        // Delete file from server
+        await axios.delete(`http://localhost:5000/api/upload/${fieldName}/${filename}`);
+        console.log('File deleted from server');
+      } catch (err) {
+        console.error('Error deleting file:', err);
+        // Continue with local removal even if server deletion fails
+      }
+    }
+    
     onChange('');
     setPreview(null);
     if (fileInputRef.current) {

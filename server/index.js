@@ -6,6 +6,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { DATABASE_SCHEMA, getTableDefinition } from "../shared/database-schema.js";
+import { cleanupOrphanedFiles, getFileStats } from "./utils/fileCleanup.js";
 
 dotenv.config();
 
@@ -40,19 +41,68 @@ const storage = multer.diskStorage({
   }
 });
 
+// File type validation function
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = {
+    'image/jpeg': ['.jpg', '.jpeg'],
+    'image/png': ['.png'],
+    'image/gif': ['.gif'],
+    'image/webp': ['.webp'],
+    'image/svg+xml': ['.svg'],
+    'application/pdf': ['.pdf'],
+    'application/msword': ['.doc'],
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+    'application/vnd.ms-excel': ['.xls'],
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+    'text/plain': ['.txt'],
+    'application/zip': ['.zip'],
+    'application/x-rar-compressed': ['.rar']
+  };
+
+  const fileExtension = path.extname(file.originalname).toLowerCase();
+  const mimeType = file.mimetype;
+
+  // Check if file type is allowed
+  if (allowedTypes[mimeType] && allowedTypes[mimeType].includes(fileExtension)) {
+    cb(null, true);
+  } else {
+    cb(new Error(`File type ${mimeType} is not allowed. Allowed types: ${Object.keys(allowedTypes).join(', ')}`), false);
+  }
+};
+
 const upload = multer({ 
   storage: storage,
   limits: {
-    fileSize: 10 * 1024 * 1024 // 10MB limit
+    fileSize: 10 * 1024 * 1024, // 10MB limit
+    files: 5 // Maximum 5 files per request
   },
-  fileFilter: (req, file, cb) => {
-    // Allow all file types for now, can be restricted later
-    cb(null, true);
-  }
+  fileFilter: fileFilter
 });
 
 // Serve static files
 app.use('/uploads', express.static('uploads'));
+
+// Error handling middleware for file uploads
+app.use((error, req, res, next) => {
+  if (error instanceof multer.MulterError) {
+    if (error.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ error: 'File too large. Maximum size is 10MB.' });
+    }
+    if (error.code === 'LIMIT_FILE_COUNT') {
+      return res.status(400).json({ error: 'Too many files. Maximum 5 files allowed.' });
+    }
+    if (error.code === 'LIMIT_UNEXPECTED_FILE') {
+      return res.status(400).json({ error: 'Unexpected field name.' });
+    }
+  }
+  
+  if (error.message.includes('File type')) {
+    return res.status(400).json({ error: error.message });
+  }
+  
+  console.error('Upload error:', error);
+  res.status(500).json({ error: 'File upload failed' });
+});
 
 // 🔗 MongoDB connect
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce_admin";
@@ -153,16 +203,24 @@ app.post("/api/upload/:fieldName", upload.single('file'), (req, res) => {
     }
     
     const fileUrl = `/uploads/${req.file.fieldname}/${req.file.filename}`;
+    const fullUrl = `${req.protocol}://${req.get('host')}${fileUrl}`;
+    
+    // Log file upload
+    console.log(`File uploaded: ${req.file.originalname} -> ${req.file.filename}`);
     
     res.json({
       success: true,
       fileUrl: fileUrl,
+      fullUrl: fullUrl,
       filename: req.file.filename,
       originalName: req.file.originalname,
       size: req.file.size,
-      mimetype: req.file.mimetype
+      mimetype: req.file.mimetype,
+      fieldname: req.file.fieldname,
+      uploadedAt: new Date().toISOString()
     });
   } catch (err) {
+    console.error('File upload error:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -174,19 +232,127 @@ app.post("/api/upload-multiple/:fieldName", upload.array('files', 10), (req, res
       return res.status(400).json({ error: 'No files uploaded' });
     }
     
-    const files = req.files.map(file => ({
-      fileUrl: `/uploads/${file.fieldname}/${file.filename}`,
-      filename: file.filename,
-      originalName: file.originalname,
-      size: file.size,
-      mimetype: file.mimetype
-    }));
+    const files = req.files.map(file => {
+      const fileUrl = `/uploads/${file.fieldname}/${file.filename}`;
+      const fullUrl = `${req.protocol}://${req.get('host')}${fileUrl}`;
+      
+      return {
+        fileUrl: fileUrl,
+        fullUrl: fullUrl,
+        filename: file.filename,
+        originalName: file.originalname,
+        size: file.size,
+        mimetype: file.mimetype,
+        fieldname: file.fieldname,
+        uploadedAt: new Date().toISOString()
+      };
+    });
+    
+    console.log(`Multiple files uploaded: ${files.length} files`);
     
     res.json({
       success: true,
-      files: files
+      files: files,
+      count: files.length
     });
   } catch (err) {
+    console.error('Multiple file upload error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 🗑️ File Delete Endpoint
+app.delete("/api/upload/:fieldName/:filename", (req, res) => {
+  try {
+    const { fieldName, filename } = req.params;
+    const filePath = path.join(uploadsDir, fieldName, filename);
+    
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'File not found' });
+    }
+    
+    // Delete file
+    fs.unlinkSync(filePath);
+    
+    console.log(`File deleted: ${filePath}`);
+    
+    res.json({
+      success: true,
+      message: 'File deleted successfully',
+      filename: filename
+    });
+  } catch (err) {
+    console.error('File deletion error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📁 Get File Info Endpoint
+app.get("/api/upload/:fieldName/:filename", (req, res) => {
+  try {
+    const { fieldName, filename } = req.params;
+    const filePath = path.join(uploadsDir, fieldName, filename);
+    
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'File not found' });
+    }
+    
+    const stats = fs.statSync(filePath);
+    const fileUrl = `/uploads/${fieldName}/${filename}`;
+    const fullUrl = `${req.protocol}://${req.get('host')}${fileUrl}`;
+    
+    res.json({
+      success: true,
+      fileUrl: fileUrl,
+      fullUrl: fullUrl,
+      filename: filename,
+      size: stats.size,
+      created: stats.birthtime,
+      modified: stats.mtime,
+      isFile: stats.isFile(),
+      isDirectory: stats.isDirectory()
+    });
+  } catch (err) {
+    console.error('File info error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 🧹 File Cleanup Endpoint
+app.post("/api/upload/cleanup/:fieldName", async (req, res) => {
+  try {
+    const { fieldName } = req.params;
+    const Model = getModel('media'); // Use media collection for cleanup
+    
+    const result = await cleanupOrphanedFiles(Model, fieldName);
+    
+    res.json({
+      success: true,
+      message: `Cleanup completed for ${fieldName}`,
+      cleaned: result.cleaned,
+      errors: result.errors
+    });
+  } catch (err) {
+    console.error('File cleanup error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📊 File Statistics Endpoint
+app.get("/api/upload/stats/:fieldName", (req, res) => {
+  try {
+    const { fieldName } = req.params;
+    const stats = getFileStats(fieldName);
+    
+    res.json({
+      success: true,
+      fieldName: fieldName,
+      stats: stats
+    });
+  } catch (err) {
+    console.error('File stats error:', err);
     res.status(500).json({ error: err.message });
   }
 });
