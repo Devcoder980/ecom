@@ -1,0 +1,337 @@
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+
+interface TableData {
+  _id: string;
+  [key: string]: any;
+}
+
+interface Pagination {
+  current: number;
+  pages: number;
+  total: number;
+}
+
+const TableManager: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentTable, setCurrentTable] = useState(searchParams.get('table') || 'users');
+  const [data, setData] = useState<TableData[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [pagination, setPagination] = useState<Pagination>({ current: 1, pages: 1, total: 0 });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('_id');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [showModal, setShowModal] = useState(false);
+  const [modalMode, setModalMode] = useState<'create' | 'edit'>('create');
+  const [selectedItem, setSelectedItem] = useState<TableData | null>(null);
+  const [formData, setFormData] = useState<Record<string, any>>({});
+
+  const tables = [
+    { name: 'users', label: 'Users' },
+    { name: 'categories', label: 'Categories' },
+    { name: 'products', label: 'Products' },
+    { name: 'product_images', label: 'Product Images' },
+    { name: 'product_attributes', label: 'Product Attributes' },
+    { name: 'product_attribute_values', label: 'Attribute Values' },
+    { name: 'product_variants', label: 'Product Variants' },
+    { name: 'customers', label: 'Customers' },
+    { name: 'addresses', label: 'Addresses' },
+    { name: 'orders', label: 'Orders' },
+    { name: 'order_items', label: 'Order Items' },
+    { name: 'cms_pages', label: 'CMS Pages' },
+    { name: 'blog_posts', label: 'Blog Posts' },
+    { name: 'blog_categories', label: 'Blog Categories' },
+    { name: 'blog_post_categories', label: 'Blog Post Categories' },
+    { name: 'url_redirects', label: 'URL Redirects' },
+    { name: 'sitemap_urls', label: 'Sitemap URLs' },
+    { name: 'reviews', label: 'Reviews' },
+    { name: 'faqs', label: 'FAQs' },
+    { name: 'inquiries', label: 'Inquiries' },
+    { name: 'quote_requests', label: 'Quote Requests' },
+    { name: 'newsletter_subscribers', label: 'Newsletter Subscribers' },
+    { name: 'coupons', label: 'Coupons' },
+    { name: 'banners', label: 'Banners' },
+    { name: 'menus', label: 'Menus' },
+    { name: 'media', label: 'Media' },
+    { name: 'settings', label: 'Settings' },
+    { name: 'company_info', label: 'Company Info' },
+    { name: 'seo_meta_overrides', label: 'SEO Meta Overrides' },
+    { name: 'activity_logs', label: 'Activity Logs' }
+  ];
+
+  useEffect(() => {
+    const table = searchParams.get('table');
+    const action = searchParams.get('action');
+    
+    if (table) {
+      setCurrentTable(table);
+    }
+    
+    if (action === 'create') {
+      setModalMode('create');
+      setShowModal(true);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    fetchData();
+  }, [currentTable, pagination.current, searchTerm, sortBy, sortOrder]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await axios.get(`http://localhost:5000/api/${currentTable}`, {
+        params: {
+          page: pagination.current,
+          limit: 10,
+          search: searchTerm,
+          sortBy,
+          sortOrder
+        }
+      });
+      
+      setData(response.data.data);
+      setPagination(response.data.pagination);
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to fetch data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleTableChange = (tableName: string) => {
+    setCurrentTable(tableName);
+    setSearchParams({ table: tableName });
+    setPagination({ current: 1, pages: 1, total: 0 });
+    setSearchTerm('');
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPagination(prev => ({ ...prev, current: 1 }));
+    fetchData();
+  };
+
+  const handleSort = (field: string) => {
+    if (sortBy === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(field);
+      setSortOrder('asc');
+    }
+  };
+
+  const handleCreate = () => {
+    setModalMode('create');
+    setSelectedItem(null);
+    setFormData({});
+    setShowModal(true);
+  };
+
+  const handleEdit = (item: TableData) => {
+    setModalMode('edit');
+    setSelectedItem(item);
+    setFormData({ ...item });
+    setShowModal(true);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm('Are you sure you want to delete this item?')) {
+      return;
+    }
+
+    try {
+      await axios.delete(`http://localhost:5000/api/${currentTable}/${id}`);
+      fetchData();
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to delete item');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      if (modalMode === 'create') {
+        await axios.post(`http://localhost:5000/api/${currentTable}`, formData);
+      } else {
+        await axios.put(`http://localhost:5000/api/${currentTable}/${selectedItem?._id}`, formData);
+      }
+      
+      setShowModal(false);
+      fetchData();
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to save item');
+    }
+  };
+
+  const handleInputChange = (field: string, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const getTableColumns = () => {
+    if (data.length === 0) return [];
+    
+    const sample = data[0];
+    return Object.keys(sample).filter(key => 
+      key !== '_id' && 
+      typeof sample[key] !== 'object' &&
+      !Array.isArray(sample[key])
+    ).slice(0, 5); // Show first 5 columns
+  };
+
+  const formatValue = (value: any) => {
+    if (value === null || value === undefined) return '-';
+    if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+    if (typeof value === 'object') return JSON.stringify(value);
+    if (typeof value === 'string' && value.length > 50) {
+      return value.substring(0, 50) + '...';
+    }
+    return String(value);
+  };
+
+  return (
+    <div className="table-manager">
+      <div className="table-selector">
+        <select 
+          value={currentTable} 
+          onChange={(e) => handleTableChange(e.target.value)}
+        >
+          {tables.map(table => (
+            <option key={table.name} value={table.name}>
+              {table.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {error && <div className="error">{error}</div>}
+
+      <div className="table-header">
+        <h2>{tables.find(t => t.name === currentTable)?.label} Management</h2>
+        <button className="btn btn-primary" onClick={handleCreate}>
+          Add New
+        </button>
+      </div>
+
+      <div className="search-bar">
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button type="submit" className="btn btn-secondary">Search</button>
+        </form>
+      </div>
+
+      <div className="data-table">
+        {loading ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <>
+            <table className="table">
+              <thead>
+                <tr>
+                  {getTableColumns().map(column => (
+                    <th 
+                      key={column}
+                      onClick={() => handleSort(column)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {column} {sortBy === column && (sortOrder === 'asc' ? '↑' : '↓')}
+                    </th>
+                  ))}
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item) => (
+                  <tr key={item._id}>
+                    {getTableColumns().map(column => (
+                      <td key={column}>{formatValue(item[column])}</td>
+                    ))}
+                    <td className="table-actions-cell">
+                      <button 
+                        className="btn btn-sm btn-primary"
+                        onClick={() => handleEdit(item)}
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        className="btn btn-sm btn-danger"
+                        onClick={() => handleDelete(item._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="pagination">
+              <button 
+                onClick={() => setPagination(prev => ({ ...prev, current: prev.current - 1 }))}
+                disabled={pagination.current === 1}
+              >
+                Previous
+              </button>
+              <span>
+                Page {pagination.current} of {pagination.pages} 
+                ({pagination.total} total)
+              </span>
+              <button 
+                onClick={() => setPagination(prev => ({ ...prev, current: prev.current + 1 }))}
+                disabled={pagination.current === pagination.pages}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>{modalMode === 'create' ? 'Create New' : 'Edit'} {tables.find(t => t.name === currentTable)?.label}</h3>
+              <button className="close-btn" onClick={() => setShowModal(false)}>×</button>
+            </div>
+            
+            <form onSubmit={handleSubmit}>
+              {getTableColumns().map(column => (
+                <div key={column} className="form-group">
+                  <label htmlFor={column}>{column}</label>
+                  <input
+                    id={column}
+                    type="text"
+                    value={formData[column] || ''}
+                    onChange={(e) => handleInputChange(column, e.target.value)}
+                  />
+                </div>
+              ))}
+              
+              <div className="form-actions">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  {modalMode === 'create' ? 'Create' : 'Update'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TableManager;
