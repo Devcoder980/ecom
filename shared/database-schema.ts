@@ -388,23 +388,62 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
   company_info: {
     name: 'company_info',
     label: 'Company Info',
-    description: 'Business information',
+    description: 'Complete business information with legal documents and social media',
     icon: '🏢',
     fields: [
-      { name: 'name', type: 'string', label: 'Company Name', required: true, placeholder: 'Company name', searchable: true, sortable: true, display: true },
-      { name: 'legal_name', type: 'string', label: 'Legal Name', required: false, placeholder: 'Legal company name', searchable: true },
+      // Basic Details
+      { name: 'name', type: 'string', label: 'Company Name', required: true, placeholder: 'Your Company Name', searchable: true, sortable: true, display: true },
+      { name: 'legal_name', type: 'string', label: 'Legal Name', required: false, placeholder: 'Legal Company Name Pvt Ltd', searchable: true },
       { name: 'logo_url', type: 'url', label: 'Logo URL', required: false, placeholder: 'https://example.com/logo.png' },
       { name: 'favicon_url', type: 'url', label: 'Favicon URL', required: false, placeholder: 'https://example.com/favicon.ico' },
-      { name: 'tagline', type: 'string', label: 'Tagline', required: false, placeholder: 'Company tagline', searchable: true },
-      { name: 'description', type: 'text', label: 'Description', required: false, placeholder: 'Company description', ui: { inputType: 'textarea', rows: 4 } },
-      { name: 'email', type: 'email', label: 'Email', required: false, placeholder: 'contact@company.com', searchable: true },
-      { name: 'phone', type: 'string', label: 'Phone', required: false, placeholder: '+91 9876543210', searchable: true },
-      { name: 'website_url', type: 'url', label: 'Website URL', required: false, placeholder: 'https://company.com' },
-      { name: 'address_line1', type: 'string', label: 'Address Line 1', required: false, placeholder: 'Street address' },
-      { name: 'city', type: 'string', label: 'City', required: false, placeholder: 'City name', searchable: true },
-      { name: 'state', type: 'string', label: 'State', required: false, placeholder: 'State name', searchable: true },
+      { name: 'tagline', type: 'string', label: 'Tagline', required: false, placeholder: 'Your Company Tagline', searchable: true },
+      { name: 'description', type: 'text', label: 'Company Description', required: false, placeholder: 'Brief company description', ui: { inputType: 'textarea', rows: 4 } },
+      
+      // Contact Information
+      { name: 'email', type: 'email', label: 'Primary Email', required: false, placeholder: 'contact@company.com', searchable: true },
+      { name: 'phone', type: 'string', label: 'Primary Phone', required: false, placeholder: '+91 9876543210', searchable: true },
+      { name: 'alternate_phone', type: 'string', label: 'Alternate Phone', required: false, placeholder: '+91 9876543211' },
+      { name: 'whatsapp', type: 'string', label: 'WhatsApp Number', required: false, placeholder: '+91 9876543210' },
+      { name: 'toll_free', type: 'string', label: 'Toll Free Number', required: false, placeholder: '1800-123-4567' },
+      
+      // Complete Address
+      { name: 'address_line1', type: 'string', label: 'Address Line 1', required: false, placeholder: 'Street address, Building name' },
+      { name: 'address_line2', type: 'string', label: 'Address Line 2', required: false, placeholder: 'Area, Locality' },
+      { name: 'landmark', type: 'string', label: 'Landmark', required: false, placeholder: 'Near Metro Station' },
+      { name: 'city', type: 'string', label: 'City', required: false, placeholder: 'Mumbai', searchable: true },
+      { name: 'state', type: 'string', label: 'State', required: false, placeholder: 'Maharashtra', searchable: true },
+      { name: 'postal_code', type: 'string', label: 'Postal Code', required: false, placeholder: '400001' },
       { name: 'country', type: 'string', label: 'Country', required: true, defaultValue: 'India', placeholder: 'India', sortable: true, display: true },
-      { name: 'gst_no', type: 'string', label: 'GST Number', required: false, placeholder: 'GST number' },
+      
+      // Legal Documents
+      { name: 'gst_no', type: 'string', label: 'GST Number', required: false, placeholder: '27ABCDE1234F1Z5' },
+      { name: 'pan_no', type: 'string', label: 'PAN Number', required: false, placeholder: 'ABCDE1234F' },
+      { name: 'cin_no', type: 'string', label: 'CIN Number', required: false, placeholder: 'U72900MH2020PTC123456' },
+      { name: 'tan_no', type: 'string', label: 'TAN Number', required: false, placeholder: 'MUMB12345F' },
+      { name: 'import_export_code', type: 'string', label: 'Import/Export Code', required: false, placeholder: 'IEC123456789' },
+      
+      // Website & Social Media
+      { name: 'website_url', type: 'url', label: 'Website URL', required: false, placeholder: 'https://company.com' },
+      { name: 'facebook_url', type: 'url', label: 'Facebook URL', required: false, placeholder: 'https://facebook.com/company' },
+      { name: 'instagram_url', type: 'url', label: 'Instagram URL', required: false, placeholder: 'https://instagram.com/company' },
+      { name: 'linkedin_url', type: 'url', label: 'LinkedIn URL', required: false, placeholder: 'https://linkedin.com/company/company' },
+      { name: 'twitter_url', type: 'url', label: 'Twitter URL', required: false, placeholder: 'https://twitter.com/company' },
+      { name: 'youtube_url', type: 'url', label: 'YouTube URL', required: false, placeholder: 'https://youtube.com/c/company' },
+      { name: 'pinterest_url', type: 'url', label: 'Pinterest URL', required: false, placeholder: 'https://pinterest.com/company' },
+      
+      // Business Hours (JSON)
+      { name: 'business_hours', type: 'json', label: 'Business Hours', required: false, placeholder: '{"monday": {"open": "09:00", "close": "18:00"}}', ui: { inputType: 'textarea', rows: 6 } },
+      
+      // SEO & Schema.org
+      { name: 'schema_type', type: 'string', label: 'Schema Type', required: true, defaultValue: 'Organization', placeholder: 'Organization' },
+      { name: 'schema_data', type: 'json', label: 'Schema Data', required: false, placeholder: '{"@type": "Organization", "name": "Company Name"}', ui: { inputType: 'textarea', rows: 4 } },
+      
+      // Additional Info
+      { name: 'established_year', type: 'number', label: 'Established Year', required: false, placeholder: '2020', ui: { inputType: 'number', min: 1800, max: 2030 } },
+      { name: 'certifications', type: 'text', label: 'Certifications', required: false, placeholder: 'ISO 9001:2015, ISO 14001:2015', ui: { inputType: 'textarea', rows: 3 } },
+      { name: 'awards', type: 'text', label: 'Awards & Recognition', required: false, placeholder: 'Best Company Award 2023', ui: { inputType: 'textarea', rows: 3 } },
+      
+      // Status
       { name: 'is_active', type: 'boolean', label: 'Active', required: true, defaultValue: true, ui: { inputType: 'checkbox' }, sortable: true, display: true },
       { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true },
       { name: 'updated_at', type: 'date', label: 'Updated At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }
