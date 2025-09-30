@@ -12,6 +12,16 @@ A comprehensive admin dashboard for e-commerce management built with **Schema-Dr
 - **SEO-Optimized Fields** - Built-in SEO field management
 - **No Code Duplication** - Add new tables without writing forms
 
+## 🔄 **Dynamic Schema Management**
+
+- **Database-Driven Schema** - Schema stored in database tables
+- **Cron Job Automation** - Automatic schema file updates every 5 minutes
+- **Schema Management UI** - Web interface for schema management
+- **Live Schema Updates** - Real-time schema synchronization
+- **Schema Versioning** - Track schema changes over time
+- **Force Update** - Manual schema regeneration
+- **Schema Status** - Monitor cron job and update status
+
 ## Features
 
 - **Complete CRUD Operations** for all database tables
@@ -133,6 +143,27 @@ export const DATABASE_SCHEMA = {
 - **File Validation** - Size and type validation per file
 - **Grid Layout** - Organized file display
 - **Add More Files** - Continue adding files after initial upload
+
+## 🔧 **Dynamic Schema Management API**
+
+### Schema Management Endpoints
+- `GET /api/schema/tables` - Get all schema tables
+- `GET /api/schema/tables/:tableName/fields` - Get table fields
+- `GET /api/schema/tables/:tableName/complete` - Get complete table schema
+- `POST /api/schema/initialize` - Initialize default schema
+- `POST /api/schema/generate` - Generate schema file
+
+### Cron Job Management
+- `GET /api/cron/status` - Get cron job status
+- `POST /api/cron/start` - Start cron job
+- `POST /api/cron/stop` - Stop cron job
+- `POST /api/cron/force-update` - Force schema update
+
+### Schema Database Tables
+- `schema_tables` - Table definitions
+- `schema_fields` - Field definitions
+- `schema_relationships` - Table relationships
+- `schema_permissions` - Permission definitions
 
 ## Tech Stack
 

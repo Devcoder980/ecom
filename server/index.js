@@ -7,6 +7,8 @@ import path from "path";
 import fs from "fs";
 import { DATABASE_SCHEMA, getTableDefinition } from "../shared/database-schema.js";
 import { cleanupOrphanedFiles, getFileStats } from "./utils/fileCleanup.js";
+import { DEFAULT_SCHEMA_DEFINITIONS } from "../shared/schema-definitions.js";
+import schemaCron from "./utils/schemaCron.js";
 
 dotenv.config();
 
@@ -108,6 +110,10 @@ app.use((error, req, res, next) => {
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce_admin";
 await mongoose.connect(MONGODB_URI);
 console.log("✅ Connected to MongoDB");
+
+// 🔄 Start schema cron job
+console.log("🔄 Starting schema management system...");
+schemaCron.start();
 
 // Cache for dynamic models
 const models = {};
@@ -353,6 +359,316 @@ app.get("/api/upload/stats/:fieldName", (req, res) => {
     });
   } catch (err) {
     console.error('File stats error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ============================================
+// DYNAMIC SCHEMA MANAGEMENT ENDPOINTS
+// ============================================
+
+// 📋 Get all schema tables
+app.get("/api/schema/tables", async (req, res) => {
+  try {
+    const Model = getModel('schema_tables');
+    const tables = await Model.find({ is_active: true }).sort({ table_name: 1 });
+    res.json({ success: true, data: tables });
+  } catch (err) {
+    console.error('Schema tables error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Get table fields
+app.get("/api/schema/tables/:tableName/fields", async (req, res) => {
+  try {
+    const { tableName } = req.params;
+    const Model = getModel('schema_fields');
+    const fields = await Model.find({ 
+      table_name: tableName, 
+      is_active: true 
+    }).sort({ field_order: 1 });
+    
+    res.json({ success: true, data: fields });
+  } catch (err) {
+    console.error('Schema fields error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Get complete schema for table
+app.get("/api/schema/tables/:tableName/complete", async (req, res) => {
+  try {
+    const { tableName } = req.params;
+    const TableModel = getModel('schema_tables');
+    const FieldModel = getModel('schema_fields');
+    
+    const table = await TableModel.findOne({ table_name: tableName, is_active: true });
+    if (!table) {
+      return res.status(404).json({ error: 'Table not found' });
+    }
+    
+    const fields = await FieldModel.find({ 
+      table_name: tableName, 
+      is_active: true 
+    }).sort({ field_order: 1 });
+    
+    res.json({ 
+      success: true, 
+      data: {
+        table: table,
+        fields: fields
+      }
+    });
+  } catch (err) {
+    console.error('Complete schema error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Initialize default schema
+app.post("/api/schema/initialize", async (req, res) => {
+  try {
+    const TableModel = getModel('schema_tables');
+    const FieldModel = getModel('schema_fields');
+    const RelationshipModel = getModel('schema_relationships');
+    const PermissionModel = getModel('schema_permissions');
+    
+    // Clear existing data
+    await TableModel.deleteMany({});
+    await FieldModel.deleteMany({});
+    await RelationshipModel.deleteMany({});
+    await PermissionModel.deleteMany({});
+    
+    // Insert default tables
+    const tables = await TableModel.insertMany(
+      DEFAULT_SCHEMA_DEFINITIONS.tables.map(table => ({
+        ...table,
+        created_at: new Date(),
+        updated_at: new Date()
+      }))
+    );
+    
+    // Insert default fields
+    const fields = await FieldModel.insertMany(
+      DEFAULT_SCHEMA_DEFINITIONS.fields.map(field => ({
+        ...field,
+        created_at: new Date(),
+        updated_at: new Date()
+      }))
+    );
+    
+    // Insert default relationships
+    const relationships = await RelationshipModel.insertMany(
+      DEFAULT_SCHEMA_DEFINITIONS.relationships.map(rel => ({
+        ...rel,
+        created_at: new Date()
+      }))
+    );
+    
+    // Insert default permissions
+    const permissions = await PermissionModel.insertMany(
+      DEFAULT_SCHEMA_DEFINITIONS.permissions.map(perm => ({
+        ...perm,
+        created_at: new Date()
+      }))
+    );
+    
+    res.json({
+      success: true,
+      message: 'Schema initialized successfully',
+      data: {
+        tables: tables.length,
+        fields: fields.length,
+        relationships: relationships.length,
+        permissions: permissions.length
+      }
+    });
+  } catch (err) {
+    console.error('Schema initialization error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Generate schema file
+app.post("/api/schema/generate", async (req, res) => {
+  try {
+    const TableModel = getModel('schema_tables');
+    const FieldModel = getModel('schema_fields');
+    const RelationshipModel = getModel('schema_relationships');
+    const PermissionModel = getModel('schema_permissions');
+    
+    // Get all active tables
+    const tables = await TableModel.find({ is_active: true }).sort({ table_name: 1 });
+    const schema = {};
+    
+    for (const table of tables) {
+      const fields = await FieldModel.find({ 
+        table_name: table.table_name, 
+        is_active: true 
+      }).sort({ field_order: 1 });
+      
+      const relationships = await RelationshipModel.find({ 
+        source_table: table.table_name, 
+        is_active: true 
+      });
+      
+      const permissions = await PermissionModel.find({ 
+        table_name: table.table_name 
+      });
+      
+      // Convert to schema format
+      schema[table.table_name] = {
+        name: table.table_name,
+        label: table.table_label,
+        description: table.table_description,
+        icon: table.table_icon,
+        fields: fields.map(field => ({
+          name: field.field_name,
+          type: field.field_type,
+          label: field.field_label,
+          required: field.is_required,
+          defaultValue: field.default_value,
+          placeholder: field.placeholder,
+          options: field.field_options,
+          validation: field.validation_rules,
+          ui: field.ui_config,
+          seo: field.is_seo_field,
+          searchable: field.is_searchable,
+          sortable: field.is_sortable,
+          display: field.is_display_field
+        })),
+        relationships: relationships.reduce((acc, rel) => {
+          acc[rel.source_field] = {
+            table: rel.target_table,
+            field: rel.target_field,
+            type: rel.relationship_type
+          };
+          return acc;
+        }, {}),
+        permissions: permissions.reduce((acc, perm) => {
+          acc[perm.role] = {
+            create: perm.can_create,
+            read: perm.can_read,
+            update: perm.can_update,
+            delete: perm.can_delete
+          };
+          return acc;
+        }, {})
+      };
+    }
+    
+    // Generate schema file content
+    const schemaContent = `// ============================================
+// DYNAMICALLY GENERATED SCHEMA
+// Generated on: ${new Date().toISOString()}
+// ============================================
+
+export const DATABASE_SCHEMA = ${JSON.stringify(schema, null, 2)};
+
+// Helper functions
+export const getTableDefinition = (tableName: string) => {
+  return DATABASE_SCHEMA[tableName];
+};
+
+export const getAllTables = () => {
+  return Object.values(DATABASE_SCHEMA);
+};
+
+export const getTableFields = (tableName: string) => {
+  const table = getTableDefinition(tableName);
+  return table ? table.fields : [];
+};
+
+export const getDisplayFields = (tableName: string) => {
+  return getTableFields(tableName).filter(field => field.display);
+};
+
+export const getSearchableFields = (tableName: string) => {
+  return getTableFields(tableName).filter(field => field.searchable);
+};
+
+export const getSortableFields = (tableName: string) => {
+  return getTableFields(tableName).filter(field => field.sortable);
+};
+
+export const getSEOFields = (tableName: string) => {
+  return getTableFields(tableName).filter(field => field.seo);
+};
+`;
+    
+    // Write to file
+    const schemaPath = path.join(process.cwd(), 'shared', 'database-schema.js');
+    fs.writeFileSync(schemaPath, schemaContent);
+    
+    res.json({
+      success: true,
+      message: 'Schema file generated successfully',
+      filePath: schemaPath,
+      tablesCount: Object.keys(schema).length
+    });
+  } catch (err) {
+    console.error('Schema generation error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ============================================
+// CRON JOB MANAGEMENT ENDPOINTS
+// ============================================
+
+// 📋 Get cron job status
+app.get("/api/cron/status", (req, res) => {
+  try {
+    const status = schemaCron.getStatus();
+    res.json({
+      success: true,
+      data: status
+    });
+  } catch (err) {
+    console.error('Cron status error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Start cron job
+app.post("/api/cron/start", (req, res) => {
+  try {
+    schemaCron.start();
+    res.json({
+      success: true,
+      message: 'Schema cron job started'
+    });
+  } catch (err) {
+    console.error('Cron start error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Stop cron job
+app.post("/api/cron/stop", (req, res) => {
+  try {
+    schemaCron.stop();
+    res.json({
+      success: true,
+      message: 'Schema cron job stopped'
+    });
+  } catch (err) {
+    console.error('Cron stop error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Force schema update
+app.post("/api/cron/force-update", async (req, res) => {
+  try {
+    await schemaCron.forceUpdate();
+    res.json({
+      success: true,
+      message: 'Schema force update completed'
+    });
+  } catch (err) {
+    console.error('Force update error:', err);
     res.status(500).json({ error: err.message });
   }
 });
