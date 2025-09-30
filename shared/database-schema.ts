@@ -4,7 +4,7 @@
 
 export interface FieldDefinition {
   name: string;
-  type: 'string' | 'number' | 'boolean' | 'date' | 'email' | 'url' | 'text' | 'select' | 'multiselect' | 'file' | 'json';
+  type: 'string' | 'number' | 'boolean' | 'date' | 'email' | 'url' | 'text' | 'select' | 'multiselect' | 'file' | 'files' | 'json';
   label: string;
   required: boolean;
   defaultValue?: any;
@@ -17,7 +17,7 @@ export interface FieldDefinition {
     custom?: string;
   };
   ui?: {
-    inputType?: 'text' | 'password' | 'email' | 'tel' | 'url' | 'number' | 'date' | 'datetime-local' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'image' | 'document';
+    inputType?: 'text' | 'password' | 'email' | 'tel' | 'url' | 'number' | 'date' | 'datetime-local' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'files' | 'image' | 'document';
     rows?: number;
     cols?: number;
     step?: number;
@@ -86,6 +86,7 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
       { name: 'slug', type: 'string', label: 'URL Slug', required: true, placeholder: 'category-slug', searchable: true, sortable: true, display: true },
       { name: 'description', type: 'text', label: 'Description', required: false, placeholder: 'Category description', ui: { inputType: 'textarea', rows: 3 } },
       { name: 'image_url', type: 'file', label: 'Category Image', required: false, ui: { inputType: 'image', accept: 'image/*' } },
+      { name: 'gallery_images', type: 'files', label: 'Gallery Images', required: false, ui: { inputType: 'files', accept: 'image/*', multiple: true } },
       { name: 'meta_title', type: 'string', label: 'Meta Title', required: false, placeholder: 'SEO title', seo: true },
       { name: 'meta_description', type: 'text', label: 'Meta Description', required: false, placeholder: 'SEO description', ui: { inputType: 'textarea', rows: 2 }, seo: true },
       { name: 'meta_keywords', type: 'string', label: 'Meta Keywords', required: false, placeholder: 'keyword1, keyword2', seo: true },
@@ -210,6 +211,8 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
       { name: 'excerpt', type: 'text', label: 'Excerpt', required: false, placeholder: 'Brief description', ui: { inputType: 'textarea', rows: 3 } },
       { name: 'content', type: 'text', label: 'Content', required: true, placeholder: 'Blog post content', ui: { inputType: 'textarea', rows: 10 } },
       { name: 'featured_image', type: 'file', label: 'Featured Image', required: false, ui: { inputType: 'image', accept: 'image/*' } },
+      { name: 'product_images', type: 'files', label: 'Product Images', required: false, ui: { inputType: 'files', accept: 'image/*', multiple: true } },
+      { name: 'product_documents', type: 'files', label: 'Product Documents', required: false, ui: { inputType: 'files', accept: '.pdf,.doc,.docx', multiple: true } },
       { name: 'author_id', type: 'string', label: 'Author', required: false, placeholder: 'Select author' },
       { name: 'meta_title', type: 'string', label: 'Meta Title', required: false, placeholder: 'SEO title', seo: true },
       { name: 'meta_description', type: 'text', label: 'Meta Description', required: false, placeholder: 'SEO description', ui: { inputType: 'textarea', rows: 2 }, seo: true },
@@ -317,7 +320,8 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
     icon: '🖼️',
     fields: [
       { name: 'title', type: 'string', label: 'Banner Title', required: true, placeholder: 'Banner title', searchable: true, sortable: true, display: true },
-      { name: 'image_url', type: 'url', label: 'Image URL', required: true, placeholder: 'https://example.com/banner.jpg' },
+      { name: 'image_url', type: 'file', label: 'Banner Image', required: true, ui: { inputType: 'image', accept: 'image/*' } },
+      { name: 'additional_images', type: 'files', label: 'Additional Images', required: false, ui: { inputType: 'files', accept: 'image/*', multiple: true } },
       { name: 'image_alt', type: 'string', label: 'Image Alt Text', required: false, placeholder: 'Banner image alt text' },
       { name: 'link_url', type: 'url', label: 'Link URL', required: false, placeholder: 'https://example.com/link' },
       { name: 'position', type: 'string', label: 'Position', required: true, defaultValue: 'homepage', placeholder: 'homepage', sortable: true, display: true },
@@ -495,7 +499,8 @@ export const DATABASE_SCHEMA: { [key: string]: TableDefinition } = {
       { name: 'company_name', type: 'string', label: 'Company Name', required: false, placeholder: 'Company name', searchable: true },
       { name: 'testimonial_text', type: 'text', label: 'Testimonial', required: true, placeholder: 'Customer testimonial', ui: { inputType: 'textarea', rows: 4 } },
       { name: 'rating', type: 'number', label: 'Rating', required: true, placeholder: '5', ui: { inputType: 'number', min: 1, max: 5 }, sortable: true, display: true },
-      { name: 'image_url', type: 'url', label: 'Customer Image', required: false, placeholder: 'https://example.com/customer.jpg' },
+      { name: 'image_url', type: 'file', label: 'Customer Image', required: false, ui: { inputType: 'image', accept: 'image/*' } },
+      { name: 'supporting_documents', type: 'files', label: 'Supporting Documents', required: false, ui: { inputType: 'files', accept: '.pdf,.doc,.docx,.jpg,.png', multiple: true } },
       { name: 'is_approved', type: 'boolean', label: 'Approved', required: true, defaultValue: false, ui: { inputType: 'checkbox' }, sortable: true, display: true },
       { name: 'display_order', type: 'number', label: 'Display Order', required: true, defaultValue: 0, ui: { inputType: 'number' }, sortable: true },
       { name: 'created_at', type: 'date', label: 'Created At', required: false, ui: { inputType: 'datetime-local' }, sortable: true }

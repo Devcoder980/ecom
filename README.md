@@ -86,9 +86,9 @@ export const DATABASE_SCHEMA = {
 - **File Validation** - Client-side validation
 - **Multiple File Support** - Upload multiple files
 
-### File Upload Example
+### File Upload Examples
 ```typescript
-// Schema definition with file upload
+// Single file upload
 {
   name: 'logo_url',
   type: 'file',
@@ -98,7 +98,41 @@ export const DATABASE_SCHEMA = {
     accept: 'image/*'
   }
 }
+
+// Multiple file upload
+{
+  name: 'product_images',
+  type: 'files',
+  label: 'Product Images',
+  ui: {
+    inputType: 'files',
+    accept: 'image/*',
+    multiple: true
+  }
+}
+
+// Multiple document upload
+{
+  name: 'product_documents',
+  type: 'files',
+  label: 'Product Documents',
+  ui: {
+    inputType: 'files',
+    accept: '.pdf,.doc,.docx',
+    multiple: true
+  }
+}
 ```
+
+### Multiple File Upload Features
+- **Drag & Drop Interface** - Drag multiple files at once
+- **File Preview** - Image thumbnails and file icons
+- **Batch Upload** - Upload multiple files simultaneously
+- **File Management** - Individual file removal
+- **Progress Tracking** - Upload progress for each file
+- **File Validation** - Size and type validation per file
+- **Grid Layout** - Organized file display
+- **Add More Files** - Continue adding files after initial upload
 
 ## Tech Stack
 
