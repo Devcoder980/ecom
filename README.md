@@ -22,6 +22,16 @@ A comprehensive admin dashboard for e-commerce management built with **Schema-Dr
 - **Force Update** - Manual schema regeneration
 - **Schema Status** - Monitor cron job and update status
 
+## 🚀 **Fully Dynamic & Reusable Framework**
+
+- **Database-Driven** - All schemas stored in MongoDB
+- **Fully Dynamic** - Can add/edit/delete schemas via admin panel
+- **Auto-Synced** - Changes update the schema file automatically
+- **Reusable** - Same system works for any project
+- **Template System** - Pre-built templates for different project types
+- **Configuration Management** - Universal framework configuration
+- **Project Generation** - Generate complete projects from templates
+
 ## Features
 
 - **Complete CRUD Operations** for all database tables
@@ -164,6 +174,31 @@ export const DATABASE_SCHEMA = {
 - `schema_fields` - Field definitions
 - `schema_relationships` - Table relationships
 - `schema_permissions` - Permission definitions
+
+## 🎯 **Framework Configuration API**
+
+### Framework Management Endpoints
+- `GET /api/framework/config` - Get framework configuration
+- `PUT /api/framework/config` - Update framework configuration
+- `GET /api/framework/templates` - Get available templates
+- `POST /api/framework/generate` - Generate project from template
+- `GET /api/framework/export` - Export configuration
+- `POST /api/framework/import` - Import configuration
+- `POST /api/framework/validate` - Validate configuration
+
+### Framework Templates
+- **E-commerce** - Complete e-commerce management system
+- **CMS** - Content management system
+- **CRM** - Customer relationship management
+- **Inventory** - Inventory and warehouse management
+
+### Configuration Features
+- **Project Settings** - Name, version, description
+- **Database Configuration** - MongoDB, MySQL, PostgreSQL support
+- **Server Settings** - Port, CORS, file upload limits
+- **Security Settings** - JWT, bcrypt, rate limiting
+- **UI Configuration** - Theme, language, pagination
+- **Feature Toggles** - Enable/disable framework features
 
 ## Tech Stack
 

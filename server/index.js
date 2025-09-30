@@ -9,6 +9,7 @@ import { DATABASE_SCHEMA, getTableDefinition } from "../shared/database-schema.j
 import { cleanupOrphanedFiles, getFileStats } from "./utils/fileCleanup.js";
 import { DEFAULT_SCHEMA_DEFINITIONS } from "../shared/schema-definitions.js";
 import schemaCron from "./utils/schemaCron.js";
+import { ConfigManager, DEFAULT_FRAMEWORK_CONFIG, FRAMEWORK_TEMPLATES, FrameworkUtils } from "../shared/framework-config.js";
 
 dotenv.config();
 
@@ -114,6 +115,10 @@ console.log("✅ Connected to MongoDB");
 // 🔄 Start schema cron job
 console.log("🔄 Starting schema management system...");
 schemaCron.start();
+
+// 🔧 Initialize framework configuration
+const configManager = new ConfigManager();
+console.log("🔧 Framework configuration initialized");
 
 // Cache for dynamic models
 const models = {};
@@ -669,6 +674,366 @@ app.post("/api/cron/force-update", async (req, res) => {
     });
   } catch (err) {
     console.error('Force update error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ============================================
+// SCHEMA CRUD OPERATIONS
+// ============================================
+
+// 📋 Create new table
+app.post("/api/schema/tables", async (req, res) => {
+  try {
+    const TableModel = getModel('schema_tables');
+    const tableData = {
+      ...req.body,
+      created_at: new Date(),
+      updated_at: new Date()
+    };
+    
+    const table = await TableModel.create(tableData);
+    
+    // Auto-sync schema file
+    await schemaCron.forceUpdate();
+    
+    res.json({
+      success: true,
+      message: 'Table created successfully',
+      data: table
+    });
+  } catch (err) {
+    console.error('Create table error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Update table
+app.put("/api/schema/tables/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const TableModel = getModel('schema_tables');
+    
+    const table = await TableModel.findByIdAndUpdate(
+      id,
+      { ...req.body, updated_at: new Date() },
+      { new: true }
+    );
+    
+    if (!table) {
+      return res.status(404).json({ error: 'Table not found' });
+    }
+    
+    // Auto-sync schema file
+    await schemaCron.forceUpdate();
+    
+    res.json({
+      success: true,
+      message: 'Table updated successfully',
+      data: table
+    });
+  } catch (err) {
+    console.error('Update table error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Delete table
+app.delete("/api/schema/tables/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const TableModel = getModel('schema_tables');
+    const FieldModel = getModel('schema_fields');
+    
+    // Delete table and all its fields
+    await TableModel.findByIdAndDelete(id);
+    await FieldModel.deleteMany({ table_name: req.body.table_name });
+    
+    // Auto-sync schema file
+    await schemaCron.forceUpdate();
+    
+    res.json({
+      success: true,
+      message: 'Table deleted successfully'
+    });
+  } catch (err) {
+    console.error('Delete table error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Create new field
+app.post("/api/schema/fields", async (req, res) => {
+  try {
+    const FieldModel = getModel('schema_fields');
+    const fieldData = {
+      ...req.body,
+      created_at: new Date(),
+      updated_at: new Date()
+    };
+    
+    const field = await FieldModel.create(fieldData);
+    
+    // Auto-sync schema file
+    await schemaCron.forceUpdate();
+    
+    res.json({
+      success: true,
+      message: 'Field created successfully',
+      data: field
+    });
+  } catch (err) {
+    console.error('Create field error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Update field
+app.put("/api/schema/fields/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const FieldModel = getModel('schema_fields');
+    
+    const field = await FieldModel.findByIdAndUpdate(
+      id,
+      { ...req.body, updated_at: new Date() },
+      { new: true }
+    );
+    
+    if (!field) {
+      return res.status(404).json({ error: 'Field not found' });
+    }
+    
+    // Auto-sync schema file
+    await schemaCron.forceUpdate();
+    
+    res.json({
+      success: true,
+      message: 'Field updated successfully',
+      data: field
+    });
+  } catch (err) {
+    console.error('Update field error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Delete field
+app.delete("/api/schema/fields/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const FieldModel = getModel('schema_fields');
+    
+    await FieldModel.findByIdAndDelete(id);
+    
+    // Auto-sync schema file
+    await schemaCron.forceUpdate();
+    
+    res.json({
+      success: true,
+      message: 'Field deleted successfully'
+    });
+  } catch (err) {
+    console.error('Delete field error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Bulk operations
+app.post("/api/schema/bulk", async (req, res) => {
+  try {
+    const { operation, data } = req.body;
+    
+    switch (operation) {
+      case 'create_tables':
+        const TableModel = getModel('schema_tables');
+        const tables = await TableModel.insertMany(
+          data.map(table => ({
+            ...table,
+            created_at: new Date(),
+            updated_at: new Date()
+          }))
+        );
+        
+        // Auto-sync schema file
+        await schemaCron.forceUpdate();
+        
+        res.json({
+          success: true,
+          message: `${tables.length} tables created successfully`,
+          data: tables
+        });
+        break;
+        
+      case 'create_fields':
+        const FieldModel = getModel('schema_fields');
+        const fields = await FieldModel.insertMany(
+          data.map(field => ({
+            ...field,
+            created_at: new Date(),
+            updated_at: new Date()
+          }))
+        );
+        
+        // Auto-sync schema file
+        await schemaCron.forceUpdate();
+        
+        res.json({
+          success: true,
+          message: `${fields.length} fields created successfully`,
+          data: fields
+        });
+        break;
+        
+      default:
+        res.status(400).json({ error: 'Invalid operation' });
+    }
+  } catch (err) {
+    console.error('Bulk operation error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ============================================
+// FRAMEWORK CONFIGURATION ENDPOINTS
+// ============================================
+
+// 📋 Get framework configuration
+app.get("/api/framework/config", (req, res) => {
+  try {
+    const config = configManager.getAll();
+    res.json({
+      success: true,
+      data: config
+    });
+  } catch (err) {
+    console.error('Get config error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Update framework configuration
+app.put("/api/framework/config", (req, res) => {
+  try {
+    configManager.update(req.body);
+    const validation = configManager.validate();
+    
+    if (!validation.valid) {
+      return res.status(400).json({
+        success: false,
+        error: 'Configuration validation failed',
+        details: validation.errors
+      });
+    }
+    
+    res.json({
+      success: true,
+      message: 'Configuration updated successfully',
+      data: configManager.getAll()
+    });
+  } catch (err) {
+    console.error('Update config error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Get framework templates
+app.get("/api/framework/templates", (req, res) => {
+  try {
+    res.json({
+      success: true,
+      data: FRAMEWORK_TEMPLATES
+    });
+  } catch (err) {
+    console.error('Get templates error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Generate project from template
+app.post("/api/framework/generate", (req, res) => {
+  try {
+    const { template, config } = req.body;
+    
+    if (!FRAMEWORK_TEMPLATES[template]) {
+      return res.status(400).json({ error: 'Invalid template' });
+    }
+    
+    // Update configuration with template-specific settings
+    const templateConfig = { ...config };
+    configManager.update(templateConfig);
+    
+    // Generate project structure
+    const structure = FrameworkUtils.generateProjectStructure(configManager.getAll());
+    const packageJson = FrameworkUtils.generatePackageJson(configManager.getAll());
+    const envFile = FrameworkUtils.generateEnvFile(configManager.getAll());
+    
+    res.json({
+      success: true,
+      message: 'Project generated successfully',
+      data: {
+        template: FRAMEWORK_TEMPLATES[template],
+        structure: structure,
+        packageJson: packageJson,
+        envFile: envFile,
+        config: configManager.getAll()
+      }
+    });
+  } catch (err) {
+    console.error('Generate project error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Export configuration
+app.get("/api/framework/export", (req, res) => {
+  try {
+    const configJson = configManager.export();
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Disposition', 'attachment; filename="framework-config.json"');
+    res.send(configJson);
+  } catch (err) {
+    console.error('Export config error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Import configuration
+app.post("/api/framework/import", (req, res) => {
+  try {
+    const { configJson } = req.body;
+    configManager.import(configJson);
+    
+    const validation = configManager.validate();
+    if (!validation.valid) {
+      return res.status(400).json({
+        success: false,
+        error: 'Configuration validation failed',
+        details: validation.errors
+      });
+    }
+    
+    res.json({
+      success: true,
+      message: 'Configuration imported successfully',
+      data: configManager.getAll()
+    });
+  } catch (err) {
+    console.error('Import config error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 📋 Validate configuration
+app.post("/api/framework/validate", (req, res) => {
+  try {
+    const validation = configManager.validate();
+    res.json({
+      success: true,
+      data: validation
+    });
+  } catch (err) {
+    console.error('Validate config error:', err);
     res.status(500).json({ error: err.message });
   }
 });
