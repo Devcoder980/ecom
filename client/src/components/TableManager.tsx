@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import FileUploadStatus from './FileUploadStatus';
+import { useTenant } from '../contexts/TenantContext';
 
 interface SchemaField {
   type: string;
@@ -30,6 +32,7 @@ interface TableSchema {
 }
 
 const TableManager: React.FC = () => {
+  const { tenantInfo, isFeatureEnabled } = useTenant();
   const [tables, setTables] = useState<Array<{ name: string; label: string; description: string }>>([]);
   const [currentTable, setCurrentTable] = useState<string>('');
   const [schema, setSchema] = useState<TableSchema | null>(null);
@@ -47,6 +50,8 @@ const TableManager: React.FC = () => {
   const [itemsPerPage] = useState(10);
   const [relationData, setRelationData] = useState<{ [key: string]: any[] }>({});
   const [relationshipSearchTerms, setRelationshipSearchTerms] = useState<{ [key: string]: string }>({});
+  const [uploadErrors, setUploadErrors] = useState<{ [key: string]: string }>({});
+  const [uploadSuccess, setUploadSuccess] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     fetchTables();
@@ -211,7 +216,10 @@ const TableManager: React.FC = () => {
           ...prev,
           [fieldName]: fileUrl
         }));
+        setUploadSuccess(prev => ({ ...prev, [fieldName]: true }));
+        setUploadErrors(prev => ({ ...prev, [fieldName]: '' }));
         console.log(`📁 File uploaded for ${fieldName}:`, fileUrl);
+        console.log(`📁 Storage type:`, response.data.storageType || 'local');
         console.log(`📁 Updated formData:`, { ...formData, [fieldName]: fileUrl });
 
         // Refresh data to show updated record
@@ -222,7 +230,8 @@ const TableManager: React.FC = () => {
       }
     } catch (err) {
       console.error('File upload error:', err);
-      setError('Failed to upload file');
+      setUploadErrors(prev => ({ ...prev, [fieldName]: 'Failed to upload file' }));
+      setUploadSuccess(prev => ({ ...prev, [fieldName]: false }));
     } finally {
       setUploadingFiles(prev => ({ ...prev, [fieldName]: false }));
     }
@@ -255,7 +264,10 @@ const TableManager: React.FC = () => {
           ...prev,
           [fieldName]: fileUrls
         }));
+        setUploadSuccess(prev => ({ ...prev, [fieldName]: true }));
+        setUploadErrors(prev => ({ ...prev, [fieldName]: '' }));
         console.log(`📁 Multiple files uploaded for ${fieldName}:`, fileUrls);
+        console.log(`📁 Storage type:`, response.data.storageType || 'local');
         console.log(`📁 Updated formData:`, { ...formData, [fieldName]: fileUrls });
 
         // Refresh data to show updated record
@@ -266,7 +278,8 @@ const TableManager: React.FC = () => {
       }
     } catch (err) {
       console.error('Multiple file upload error:', err);
-      setError('Failed to upload files');
+      setUploadErrors(prev => ({ ...prev, [fieldName]: 'Failed to upload files' }));
+      setUploadSuccess(prev => ({ ...prev, [fieldName]: false }));
     } finally {
       setUploadingFiles(prev => ({ ...prev, [fieldName]: false }));
     }

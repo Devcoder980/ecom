@@ -6,6 +6,12 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from 'url';
+import { 
+  R2StorageService, 
+  createMulterConfig, 
+  extractSubdomain, 
+  initializeR2Storage 
+} from './r2-storage.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,8 +22,25 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// File upload configuration
-const storage = multer.diskStorage({
+// Multi-tenant subdomain extraction middleware
+app.use(extractSubdomain);
+
+// Initialize R2 storage service
+let r2StorageService = null;
+
+// Initialize R2 storage based on subdomain
+const initializeStorage = (subdomain) => {
+  r2StorageService = initializeR2Storage(subdomain);
+  console.log(`🌐 Initialized R2 storage for subdomain: ${subdomain}`);
+};
+
+// File upload configuration - R2 Storage
+const createUploadMiddleware = (subdomain = 'default') => {
+  return createMulterConfig(subdomain);
+};
+
+// Fallback local storage configuration (for development)
+const localStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadPath = path.join(__dirname, 'uploads');
     if (!fs.existsSync(uploadPath)) {
@@ -31,8 +54,8 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ 
-  storage: storage,
+const localUpload = multer({ 
+  storage: localStorage,
   limits: {
     fileSize: 10 * 1024 * 1024 // 10MB limit
   },
@@ -534,85 +557,171 @@ app.delete("/api/:collection/:id", async (req, res) => {
   }
 });
 
-// 📁 File upload endpoint
-app.post("/api/upload", upload.single('file'), (req, res) => {
+// 📁 File upload endpoint with R2 storage
+app.post("/api/upload", async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
-    }
+    // Initialize storage for current subdomain
+    initializeStorage(req.subdomain);
     
-    const fileUrl = `/uploads/${req.file.filename}`;
+    // Use R2 upload if configured, otherwise fallback to local
+    const uploadMiddleware = process.env.R2_ACCESS_KEY_ID ? 
+      createUploadMiddleware(req.subdomain).single('file') : 
+      localUpload.single('file');
     
-    res.json({
-      success: true,
-      file: {
-        filename: req.file.filename,
-        originalname: req.file.originalname,
-        mimetype: req.file.mimetype,
-        size: req.file.size,
-        url: fileUrl
+    uploadMiddleware(req, res, async (err) => {
+      if (err) {
+        return res.status(400).json({ error: err.message });
       }
+      
+      if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+      
+      let fileUrl;
+      let fileData;
+      
+      if (process.env.R2_ACCESS_KEY_ID && req.file.location) {
+        // R2 storage
+        fileUrl = req.file.location;
+        fileData = {
+          filename: req.file.key,
+          originalname: req.file.originalname,
+          mimetype: req.file.mimetype,
+          size: req.file.size,
+          url: fileUrl,
+          bucket: req.file.bucket,
+          storage: 'r2'
+        };
+      } else {
+        // Local storage fallback
+        fileUrl = `/uploads/${req.file.filename}`;
+        fileData = {
+          filename: req.file.filename,
+          originalname: req.file.originalname,
+          mimetype: req.file.mimetype,
+          size: req.file.size,
+          url: fileUrl,
+          storage: 'local'
+        };
+      }
+      
+      res.json({
+        success: true,
+        file: fileData
+      });
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// 📁 Multiple file upload endpoint
-app.post("/api/upload-multiple", upload.array('files', 10), (req, res) => {
+// 📁 Multiple file upload endpoint with R2 storage
+app.post("/api/upload-multiple", async (req, res) => {
   try {
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ error: 'No files uploaded' });
-    }
+    // Initialize storage for current subdomain
+    initializeStorage(req.subdomain);
     
-    const files = req.files.map(file => ({
-      filename: file.filename,
-      originalname: file.originalname,
-      mimetype: file.mimetype,
-      size: file.size,
-      url: `/uploads/${file.filename}`
-    }));
+    // Use R2 upload if configured, otherwise fallback to local
+    const uploadMiddleware = process.env.R2_ACCESS_KEY_ID ? 
+      createUploadMiddleware(req.subdomain).array('files', 10) : 
+      localUpload.array('files', 10);
     
-    res.json({
-      success: true,
-      files: files
+    uploadMiddleware(req, res, async (err) => {
+      if (err) {
+        return res.status(400).json({ error: err.message });
+      }
+      
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ error: 'No files uploaded' });
+      }
+      
+      const files = req.files.map(file => {
+        if (process.env.R2_ACCESS_KEY_ID && file.location) {
+          // R2 storage
+          return {
+            filename: file.key,
+            originalname: file.originalname,
+            mimetype: file.mimetype,
+            size: file.size,
+            url: file.location,
+            bucket: file.bucket,
+            storage: 'r2'
+          };
+        } else {
+          // Local storage fallback
+          return {
+            filename: file.filename,
+            originalname: file.originalname,
+            mimetype: file.mimetype,
+            size: file.size,
+            url: `/uploads/${file.filename}`,
+            storage: 'local'
+          };
+        }
+      });
+      
+      res.json({
+        success: true,
+        files: files
+      });
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// 📁 Table-specific file upload endpoint (supports multiple files)
-app.post("/api/:collection/upload", upload.any(), async (req, res) => {
+// 📁 Table-specific file upload endpoint with R2 storage (supports multiple files)
+app.post("/api/:collection/upload", async (req, res) => {
   try {
     const { collection } = req.params;
     const { fieldName, recordId } = req.body;
     
-    console.log(`📁 File upload for ${collection}:`);
-    console.log('📄 Body:', req.body);
-    console.log('📁 Files:', req.files);
-    console.log('🆔 Record ID:', recordId);
+    // Initialize storage for current subdomain
+    initializeStorage(req.subdomain);
     
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ error: 'No files uploaded' });
-    }
+    // Use R2 upload if configured, otherwise fallback to local
+    const uploadMiddleware = process.env.R2_ACCESS_KEY_ID ? 
+      createUploadMiddleware(req.subdomain).any() : 
+      localUpload.any();
     
-    const uploadedFiles = {};
-    
-    // Group files by field name
-    req.files.forEach(file => {
-      const fileFieldName = file.fieldname;
-      const fileUrl = `/uploads/${file.filename}`;
-      
-      console.log(`📁 Processing file: fieldname=${fileFieldName}, filename=${file.filename}`);
-      
-      if (!uploadedFiles[fileFieldName]) {
-        uploadedFiles[fileFieldName] = [];
+    uploadMiddleware(req, res, async (err) => {
+      if (err) {
+        return res.status(400).json({ error: err.message });
       }
-      uploadedFiles[fileFieldName].push(fileUrl);
       
-      console.log(`📁 File uploaded: ${fileFieldName} -> /uploads/${file.filename}`);
-    });
+      console.log(`📁 File upload for ${collection}:`);
+      console.log('📄 Body:', req.body);
+      console.log('📁 Files:', req.files);
+      console.log('🆔 Record ID:', recordId);
+      
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ error: 'No files uploaded' });
+      }
+      
+      const uploadedFiles = {};
+      
+      // Group files by field name
+      req.files.forEach(file => {
+        const fileFieldName = file.fieldname;
+        let fileUrl;
+        
+        if (process.env.R2_ACCESS_KEY_ID && file.location) {
+          // R2 storage
+          fileUrl = file.location;
+          console.log(`📁 Processing file: fieldname=${fileFieldName}, key=${file.key}`);
+          console.log(`📁 File uploaded: ${fileFieldName} -> ${fileUrl}`);
+        } else {
+          // Local storage fallback
+          fileUrl = `/uploads/${file.filename}`;
+          console.log(`📁 Processing file: fieldname=${fileFieldName}, filename=${file.filename}`);
+          console.log(`📁 File uploaded: ${fileFieldName} -> ${fileUrl}`);
+        }
+        
+        if (!uploadedFiles[fileFieldName]) {
+          uploadedFiles[fileFieldName] = [];
+        }
+        uploadedFiles[fileFieldName].push(fileUrl);
+      });
     
     // Convert single file arrays to single URLs for backward compatibility
     const processedFiles = {};
@@ -706,6 +815,52 @@ app.put("/api/:collection/:id", async (req, res) => {
   } catch (err) {
     console.error('❌ Error updating document:', err);
     res.status(500).json({ error: err.message });
+  }
+});
+
+// 🌐 Tenant information endpoint
+app.get("/api/tenant/info", async (req, res) => {
+  try {
+    const { subdomain } = req.query;
+    const currentSubdomain = subdomain || req.subdomain || 'default';
+    
+    console.log(`🌐 Tenant info request for subdomain: ${currentSubdomain}`);
+    
+    // Import tenant configuration
+    const { getTenantConfig } = await import('./multi-tenant-config.js');
+    const tenantConfig = getTenantConfig(currentSubdomain);
+    
+    // Get storage type based on R2 configuration
+    const storageType = process.env.R2_ACCESS_KEY_ID ? 'r2' : 'local';
+    
+    const tenantInfo = {
+      subdomain: currentSubdomain,
+      isDefault: currentSubdomain === 'default' || currentSubdomain === 'localhost',
+      displayName: tenantConfig.name || `${currentSubdomain} Store`,
+      storageType: storageType,
+      features: tenantConfig.features || {
+        fileUpload: true,
+        analytics: true,
+        seo: true,
+        multiLanguage: false,
+      },
+      limits: tenantConfig.limits || {
+        maxFileSize: 10 * 1024 * 1024, // 10MB
+        maxFiles: 10,
+        storageQuota: 10 * 1024 * 1024 * 1024, // 10GB
+      },
+    };
+    
+    console.log(`✅ Tenant info provided for ${currentSubdomain}:`, {
+      displayName: tenantInfo.displayName,
+      storageType: tenantInfo.storageType,
+      features: tenantInfo.features,
+    });
+    
+    res.json(tenantInfo);
+  } catch (error) {
+    console.error('❌ Error getting tenant info:', error);
+    res.status(500).json({ error: 'Failed to get tenant information' });
   }
 });
 

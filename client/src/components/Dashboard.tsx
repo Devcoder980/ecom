@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import TenantInfo from './TenantInfo';
 
 interface DashboardStats {
   [key: string]: {
@@ -114,6 +115,9 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Tenant Information */}
+      <TenantInfo />
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
