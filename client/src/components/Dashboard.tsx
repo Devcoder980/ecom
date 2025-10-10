@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import TenantInfo from './TenantInfo';
+
 
 interface DashboardStats {
   [key: string]: {
@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
     const fetchData = async () => {
       try {
         // Fetch available tables
-        const tablesResponse = await axios.get('http://localhost:5000/api/schemas');
+        const tablesResponse = await axios.get('/api/schemas');
         const tablesData = Array.isArray(tablesResponse.data) ? tablesResponse.data : [];
         setTables(tablesData);
 
@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
 
         for (const table of tablesData) {
           try {
-            const response = await axios.get(`http://localhost:5000/api/${table.name}/stats`);
+            const response = await axios.get(`/api/${table.name}/stats`);
             statsData[table.name] = response.data;
           } catch (error) {
             console.error(`Error fetching stats for ${table.name}:`, error);
@@ -116,8 +116,7 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Tenant Information */}
-      <TenantInfo />
+
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

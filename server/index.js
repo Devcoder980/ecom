@@ -6,12 +6,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from 'url';
-import { 
-  R2StorageService, 
-  createMulterConfig, 
-  extractSubdomain, 
-  initializeR2Storage 
-} from './r2-storage.js';
+import { tigrisStorage, createTigrisMulter, isTigrisEnabled } from './storage-service.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,58 +17,23 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Multi-tenant subdomain extraction middleware
-app.use(extractSubdomain);
+// Initialize Tigris storage (required - no fallback)
+if (!isTigrisEnabled) {
+  console.error('❌ Tigris storage is not configured!');
+  console.error('Please set TIGRIS_STORAGE_ACCESS_KEY_ID and TIGRIS_STORAGE_SECRET_ACCESS_KEY in .env');
+  process.exit(1);
+}
 
-// Initialize R2 storage service
-let r2StorageService = null;
+console.log(`☁️  Tigris Cloud Storage Enabled`);
+console.log(`📦 Bucket: ${process.env.TIGRIS_BUCKET_NAME || 'ecommerce-storage'}`);
 
-// Initialize R2 storage based on subdomain
-const initializeStorage = (subdomain) => {
-  r2StorageService = initializeR2Storage(subdomain);
-  console.log(`🌐 Initialized R2 storage for subdomain: ${subdomain}`);
-};
+// Initialize Tigris multer
+const upload = createTigrisMulter();
 
-// File upload configuration - R2 Storage
-const createUploadMiddleware = (subdomain = 'default') => {
-  return createMulterConfig(subdomain);
-};
-
-// Fallback local storage configuration (for development)
-const localStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, 'uploads');
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true });
-    }
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
-
-const localUpload = multer({ 
-  storage: localStorage,
-  limits: {
-    fileSize: 10 * 1024 * 1024 // 10MB limit
-  },
-  fileFilter: (req, file, cb) => {
-    const allowedTypes = /jpeg|jpg|png|gif|webp|pdf|doc|docx|xls|xlsx/;
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = allowedTypes.test(file.mimetype);
-    
-    if (mimetype && extname) {
-      return cb(null, true);
-    } else {
-      cb(new Error('Invalid file type. Only images and documents are allowed.'));
-    }
-  }
-});
-
-// Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+if (!upload) {
+  console.error('❌ Failed to initialize Tigris storage');
+  process.exit(1);
+}
 
 // Import database schema
 import { DATABASE_SCHEMA } from '../schema/database-schema.js';
@@ -87,9 +47,11 @@ import {
   getDynamicModel
 } from './schema-manager.js';
 
-// 🔗 MongoDB connect
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce_admin";
-await mongoose.connect(MONGODB_URI);
+// 🔗 MongoDB connection
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://prabhudevrndtechnosoft_db_user:t4ybtSMowqcDyA2l@cluster0.klz0mpb.mongodb.net";
+
+// Initialize database connection
+await mongoose.connect(`${MONGODB_URI}/ecommerce_admin`);
 console.log("✅ Connected to MongoDB");
 
 // 🗄️ Auto-create tables if they don't exist
@@ -226,7 +188,13 @@ async function getModel(collectionName) {
         delete mongoose.models[normalizedName];
       }
       
-      const mongooseSchema = new mongoose.Schema({}, { strict: false });
+      // Create schema from static definition
+      const schemaFields = {};
+      Object.entries(staticSchema.fields).forEach(([fieldName, fieldDef]) => {
+        schemaFields[fieldName] = getMongooseFieldType(fieldDef.type);
+      });
+      
+      const mongooseSchema = new mongoose.Schema(schemaFields, { strict: false });
       models[normalizedName] = mongoose.model(normalizedName, mongooseSchema);
     }
   }
@@ -274,10 +242,7 @@ app.get("/api/relationship/:tableName", async (req, res) => {
   try {
     const { tableName } = req.params;
     const { search = '', limit = 1000, displayField = 'name' } = req.query;
-    
-    console.log(`🔗 Relationship request for table: ${tableName}`);
-    console.log(`🔗 Normalized table name: ${normalizeTableName(tableName)}`);
-    
+  
     const Model = await getModel(tableName);
     let query = {};
     
@@ -376,14 +341,14 @@ app.post("/api/models/clear", (req, res) => {
 // 🗄️ Initialize database tables
 app.post("/api/database/initialize", async (req, res) => {
   try {
-    console.log("🚀 Manual database initialization triggered...");
+    // console.log("🚀 Manual database initialization triggered...");
     
     // Check if any schemas exist in database
     const existingSchemas = await getAllSchemas();
-    console.log(`📋 Found ${existingSchemas.length} existing schemas in database`);
+    // console.log(`📋 Found ${existingSchemas.length} existing schemas in database`);
     
     if (existingSchemas.length === 0) {
-      console.log("⚠️  No schemas found in database. Creating from DATABASE_SCHEMA...");
+      // console.log("⚠️  No schemas found in database. Creating from DATABASE_SCHEMA...");
       
       let createdCount = 0;
       let errorCount = 0;
@@ -391,7 +356,7 @@ app.post("/api/database/initialize", async (req, res) => {
       // Create all schemas from DATABASE_SCHEMA
       for (const [tableName, schemaData] of Object.entries(DATABASE_SCHEMA)) {
         try {
-          console.log(`📝 Creating schema for ${tableName}...`);
+          // console.log(`📝 Creating schema for ${tableName}...`);
           
           // Convert schema fields from object to array format
           const fieldsArray = Object.entries(schemaData.fields).map(([fieldName, fieldData]) => ({
@@ -408,7 +373,7 @@ app.post("/api/database/initialize", async (req, res) => {
           };
           
           await createSchema(schemaToCreate);
-          console.log(`✅ Schema created for ${tableName}`);
+          // console.log(`✅ Schema created for ${tableName}`);
           createdCount++;
         } catch (error) {
           console.error(`❌ Error creating schema for ${tableName}:`, error.message);
@@ -557,16 +522,10 @@ app.delete("/api/:collection/:id", async (req, res) => {
   }
 });
 
-// 📁 File upload endpoint with R2 storage
+// 📁 File upload endpoint (Tigris or Local)
 app.post("/api/upload", async (req, res) => {
   try {
-    // Initialize storage for current subdomain
-    initializeStorage(req.subdomain);
-    
-    // Use R2 upload if configured, otherwise fallback to local
-    const uploadMiddleware = process.env.R2_ACCESS_KEY_ID ? 
-      createUploadMiddleware(req.subdomain).single('file') : 
-      localUpload.single('file');
+    const uploadMiddleware = upload.single('file');
     
     uploadMiddleware(req, res, async (err) => {
       if (err) {
@@ -580,8 +539,8 @@ app.post("/api/upload", async (req, res) => {
       let fileUrl;
       let fileData;
       
-      if (process.env.R2_ACCESS_KEY_ID && req.file.location) {
-        // R2 storage
+      if (process.env.TIGRIS_ACCESS_KEY_ID && req.file.location) {
+        // Tigris storage
         fileUrl = req.file.location;
         fileData = {
           filename: req.file.key,
@@ -590,7 +549,7 @@ app.post("/api/upload", async (req, res) => {
           size: req.file.size,
           url: fileUrl,
           bucket: req.file.bucket,
-          storage: 'r2'
+          storage: 'tigris'
         };
       } else {
         // Local storage fallback
@@ -615,16 +574,10 @@ app.post("/api/upload", async (req, res) => {
   }
 });
 
-// 📁 Multiple file upload endpoint with R2 storage
+// 📁 Multiple file upload endpoint (Tigris or Local)
 app.post("/api/upload-multiple", async (req, res) => {
   try {
-    // Initialize storage for current subdomain
-    initializeStorage(req.subdomain);
-    
-    // Use R2 upload if configured, otherwise fallback to local
-    const uploadMiddleware = process.env.R2_ACCESS_KEY_ID ? 
-      createUploadMiddleware(req.subdomain).array('files', 10) : 
-      localUpload.array('files', 10);
+    const uploadMiddleware = upload.array('files', 10);
     
     uploadMiddleware(req, res, async (err) => {
       if (err) {
@@ -636,8 +589,8 @@ app.post("/api/upload-multiple", async (req, res) => {
       }
       
       const files = req.files.map(file => {
-        if (process.env.R2_ACCESS_KEY_ID && file.location) {
-          // R2 storage
+        if (process.env.TIGRIS_ACCESS_KEY_ID && file.location) {
+          // Tigris storage
           return {
             filename: file.key,
             originalname: file.originalname,
@@ -645,7 +598,7 @@ app.post("/api/upload-multiple", async (req, res) => {
             size: file.size,
             url: file.location,
             bucket: file.bucket,
-            storage: 'r2'
+            storage: 'tigris'
           };
         } else {
           // Local storage fallback
@@ -669,20 +622,13 @@ app.post("/api/upload-multiple", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// 📁 Table-specific file upload endpoint with R2 storage (supports multiple files)
+// 📁 Table-specific file upload endpoint (Tigris or Local) - supports multiple files
 app.post("/api/:collection/upload", async (req, res) => {
   try {
     const { collection } = req.params;
     const { fieldName, recordId } = req.body;
     
-    // Initialize storage for current subdomain
-    initializeStorage(req.subdomain);
-    
-    // Use R2 upload if configured, otherwise fallback to local
-    const uploadMiddleware = process.env.R2_ACCESS_KEY_ID ? 
-      createUploadMiddleware(req.subdomain).any() : 
-      localUpload.any();
+    const uploadMiddleware = upload.any();
     
     uploadMiddleware(req, res, async (err) => {
       if (err) {
@@ -705,8 +651,8 @@ app.post("/api/:collection/upload", async (req, res) => {
         const fileFieldName = file.fieldname;
         let fileUrl;
         
-        if (process.env.R2_ACCESS_KEY_ID && file.location) {
-          // R2 storage
+        if (process.env.TIGRIS_STORAGE_ACCESS_KEY_ID && file.location) {
+          // Tigris storage
           fileUrl = file.location;
           console.log(`📁 Processing file: fieldname=${fileFieldName}, key=${file.key}`);
           console.log(`📁 File uploaded: ${fileFieldName} -> ${fileUrl}`);
@@ -772,12 +718,13 @@ app.post("/api/:collection/upload", async (req, res) => {
       recordId: recordId,
       uploadedFiles: processedFiles
     });
+
+    });
   } catch (err) {
     console.error('❌ Error uploading file:', err);
     res.status(500).json({ error: err.message });
   }
 });
-
 // 🟢 Create new document (JSON only, no files)
 app.post("/api/:collection", async (req, res) => {
   try {
@@ -815,52 +762,6 @@ app.put("/api/:collection/:id", async (req, res) => {
   } catch (err) {
     console.error('❌ Error updating document:', err);
     res.status(500).json({ error: err.message });
-  }
-});
-
-// 🌐 Tenant information endpoint
-app.get("/api/tenant/info", async (req, res) => {
-  try {
-    const { subdomain } = req.query;
-    const currentSubdomain = subdomain || req.subdomain || 'default';
-    
-    console.log(`🌐 Tenant info request for subdomain: ${currentSubdomain}`);
-    
-    // Import tenant configuration
-    const { getTenantConfig } = await import('./multi-tenant-config.js');
-    const tenantConfig = getTenantConfig(currentSubdomain);
-    
-    // Get storage type based on R2 configuration
-    const storageType = process.env.R2_ACCESS_KEY_ID ? 'r2' : 'local';
-    
-    const tenantInfo = {
-      subdomain: currentSubdomain,
-      isDefault: currentSubdomain === 'default' || currentSubdomain === 'localhost',
-      displayName: tenantConfig.name || `${currentSubdomain} Store`,
-      storageType: storageType,
-      features: tenantConfig.features || {
-        fileUpload: true,
-        analytics: true,
-        seo: true,
-        multiLanguage: false,
-      },
-      limits: tenantConfig.limits || {
-        maxFileSize: 10 * 1024 * 1024, // 10MB
-        maxFiles: 10,
-        storageQuota: 10 * 1024 * 1024 * 1024, // 10GB
-      },
-    };
-    
-    console.log(`✅ Tenant info provided for ${currentSubdomain}:`, {
-      displayName: tenantInfo.displayName,
-      storageType: tenantInfo.storageType,
-      features: tenantInfo.features,
-    });
-    
-    res.json(tenantInfo);
-  } catch (error) {
-    console.error('❌ Error getting tenant info:', error);
-    res.status(500).json({ error: 'Failed to get tenant information' });
   }
 });
 

@@ -83,7 +83,7 @@ const SchemaManager: React.FC = () => {
 
   const fetchAvailableTables = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/schemas');
+      const response = await axios.get('/api/schemas');
       const tables = response.data.map((schema: any) => ({
         name: schema.name || schema.tableName,
         label: schema.label
@@ -98,7 +98,7 @@ const SchemaManager: React.FC = () => {
   const fetchSchemas = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/schemas');
+      const response = await axios.get('/api/schemas');
       setSchemas(response.data);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to fetch schemas');
@@ -126,7 +126,7 @@ const SchemaManager: React.FC = () => {
       if (!tableName) {
         throw new Error('Table name is undefined');
       }
-      const response = await axios.get(`http://localhost:5000/api/schema/${tableName}`);
+      const response = await axios.get(`/api/schema/${tableName}`);
       const fullSchema = response.data;
       setFormData(fullSchema);
       setSelectedSchema(fullSchema);
@@ -142,7 +142,7 @@ const SchemaManager: React.FC = () => {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this schema?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/schema/${id}`);
+        await axios.delete(`/api/schema/${id}`);
         await fetchSchemas();
       } catch (err: any) {
         setError(err.response?.data?.error || 'Failed to delete schema');
@@ -154,9 +154,9 @@ const SchemaManager: React.FC = () => {
     e.preventDefault();
     try {
       if (modalMode === 'create') {
-        await axios.post('http://localhost:5000/api/schema', formData);
+        await axios.post('/api/schema', formData);
       } else {
-        await axios.put(`http://localhost:5000/api/schema/${selectedSchema?._id}`, formData);
+        await axios.put(`/api/schema/${selectedSchema?._id}`, formData);
       }
       setShowModal(false);
       await fetchSchemas();

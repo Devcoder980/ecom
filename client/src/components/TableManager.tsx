@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FileUploadStatus from './FileUploadStatus';
-import { useTenant } from '../contexts/TenantContext';
 
 interface SchemaField {
   type: string;
@@ -32,7 +31,7 @@ interface TableSchema {
 }
 
 const TableManager: React.FC = () => {
-  const { tenantInfo, isFeatureEnabled } = useTenant();
+ 
   const [tables, setTables] = useState<Array<{ name: string; label: string; description: string }>>([]);
   const [currentTable, setCurrentTable] = useState<string>('');
   const [schema, setSchema] = useState<TableSchema | null>(null);
@@ -80,7 +79,7 @@ const TableManager: React.FC = () => {
 
   const fetchTables = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/schemas');
+      const response = await axios.get('/api/schemas');
       setTables(response.data);
       if (response.data.length > 0) {
         setCurrentTable(response.data[0].name);
@@ -93,7 +92,7 @@ const TableManager: React.FC = () => {
   const fetchSchema = async () => {
     try {
       console.log(`📋 Fetching schema for table: ${currentTable}`);
-      const response = await axios.get(`http://localhost:5000/api/schema/${currentTable}`);
+      const response = await axios.get(`/api/schema/${currentTable}`);
       console.log(`✅ Schema fetched:`, response.data);
 
       // Convert fields array to object format if needed
@@ -117,7 +116,7 @@ const TableManager: React.FC = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/api/${currentTable}?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
+      const response = await axios.get(`/api/${currentTable}?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
       setData(response.data.data || []);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to fetch data');
@@ -130,7 +129,7 @@ const TableManager: React.FC = () => {
     try {
       console.log(`🔗 Fetching relation data for ${relationTable}`, { displayField, searchTerm });
       const searchParam = searchTerm ? `&search=${encodeURIComponent(searchTerm)}` : '';
-      const response = await axios.get(`http://localhost:5000/api/relationship/${relationTable}?limit=1000&displayField=${displayField || 'name'}${searchParam}`);
+      const response = await axios.get(`/api/relationship/${relationTable}?limit=1000&displayField=${displayField || 'name'}${searchParam}`);
       console.log(`✅ Relation data fetched for ${relationTable}:`, response.data);
       setRelationData(prev => ({
         ...prev,
@@ -184,7 +183,7 @@ const TableManager: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this item?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/${currentTable}/${id}`);
+      await axios.delete(`/api/${currentTable}/${id}`);
       fetchData();
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to delete item');
@@ -204,7 +203,7 @@ const TableManager: React.FC = () => {
         formData.append('recordId', selectedItem._id);
       }
 
-      const response = await axios.post(`http://localhost:5000/api/${currentTable}/upload`, formData, {
+      const response = await axios.post(`/api/${currentTable}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -220,6 +219,7 @@ const TableManager: React.FC = () => {
         setUploadErrors(prev => ({ ...prev, [fieldName]: '' }));
         console.log(`📁 File uploaded for ${fieldName}:`, fileUrl);
         console.log(`📁 Storage type:`, response.data.storageType || 'local');
+        console.log(`🚀 Using Tigris storage for fast global access`);
         console.log(`📁 Updated formData:`, { ...formData, [fieldName]: fileUrl });
 
         // Refresh data to show updated record
@@ -252,7 +252,7 @@ const TableManager: React.FC = () => {
         formData.append('recordId', selectedItem._id);
       }
 
-      const response = await axios.post(`http://localhost:5000/api/${currentTable}/upload`, formData, {
+      const response = await axios.post(`/api/${currentTable}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -268,6 +268,7 @@ const TableManager: React.FC = () => {
         setUploadErrors(prev => ({ ...prev, [fieldName]: '' }));
         console.log(`📁 Multiple files uploaded for ${fieldName}:`, fileUrls);
         console.log(`📁 Storage type:`, response.data.storageType || 'local');
+        console.log(`🚀 Using Tigris storage for fast global access`);
         console.log(`📁 Updated formData:`, { ...formData, [fieldName]: fileUrls });
 
         // Refresh data to show updated record
@@ -290,13 +291,13 @@ const TableManager: React.FC = () => {
 
     try {
       if (modalMode === 'create') {
-        await axios.post(`http://localhost:5000/api/${currentTable}`, formData, {
+        await axios.post(`/api/${currentTable}`, formData, {
           headers: {
             'Content-Type': 'application/json',
           },
         });
       } else {
-        await axios.put(`http://localhost:5000/api/${currentTable}/${selectedItem?._id}`, formData, {
+        await axios.put(`/api/${currentTable}/${selectedItem?._id}`, formData, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -539,7 +540,7 @@ const TableManager: React.FC = () => {
                     {value.map((fileUrl, index) => (
                       <div key={index} className="border rounded p-2">
                         {field.fileType === 'image' ? (
-                          <img src={`http://localhost:5000${fileUrl}`} alt={`Preview ${index + 1}`} className="w-full h-20 object-cover rounded" />
+                          <img src={`${fileUrl}`} alt={`Preview ${index + 1}`} className="w-full h-20 object-cover rounded" />
                         ) : (
                           <div className="text-sm text-gray-600">File {index + 1}</div>
                         )}
@@ -549,7 +550,7 @@ const TableManager: React.FC = () => {
                 ) : (
                   <div className="border rounded p-2">
                     {field.fileType === 'image' ? (
-                      <img src={`http://localhost:5000${value}`} alt="Preview" className="w-full h-20 object-cover rounded" />
+                      <img src={`${value}`} alt="Preview" className="w-full h-20 object-cover rounded" />
                     ) : (
                       <div className="text-sm text-gray-600">File uploaded</div>
                     )}

@@ -3,19 +3,15 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import Dashboard from './components/Dashboard';
 import TableManager from './components/TableManager';
 import SchemaManager from './components/SchemaManager';
-import TenantInfo from './components/TenantInfo';
-import { TenantProvider } from './contexts/TenantContext';
 import './index.css';
 
 const App: React.FC = () => {
   return (
-    <TenantProvider>
-      <Router>
-        <div className="min-h-screen bg-gray-50">
-          <AppLayout />
-        </div>
-      </Router>
-    </TenantProvider>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <AppLayout />
+      </div>
+    </Router>
   );
 };
 

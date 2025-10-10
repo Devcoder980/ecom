@@ -7,7 +7,7 @@ export interface TenantInfo {
   subdomain: string;
   isDefault: boolean;
   displayName: string;
-  storageType: 'r2' | 'local';
+  storageType: 'tigris' | 'local';
   features: {
     fileUpload: boolean;
     analytics: boolean;
@@ -120,13 +120,13 @@ export const isFileTypeAllowed = (file: File, allowedTypes: string[]): boolean =
 };
 
 // Get storage status indicator
-export const getStorageStatus = (storageType: 'r2' | 'local'): { color: string; text: string; icon: string } => {
+export const getStorageStatus = (storageType: 'tigris' | 'local'): { color: string; text: string; icon: string } => {
   switch (storageType) {
-    case 'r2':
+    case 'tigris':
       return {
-        color: 'text-green-600',
-        text: 'CloudFlare R2',
-        icon: '☁️',
+        color: 'text-purple-600',
+        text: 'Tigris Storage',
+        icon: '🚀',
       };
     case 'local':
       return {

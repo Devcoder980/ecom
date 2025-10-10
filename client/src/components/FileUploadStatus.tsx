@@ -4,8 +4,6 @@
 // ============================================
 
 import React from 'react';
-import { useTenant } from '../contexts/TenantContext';
-import { formatFileSize, isFileSizeValid, isFileTypeAllowed } from '../utils/subdomain';
 
 interface FileUploadStatusProps {
   uploading: boolean;
@@ -17,6 +15,19 @@ interface FileUploadStatusProps {
   uploadedUrl?: string;
 }
 
+// Helper function to format file size
+const formatFileSize = (bytes: number): string => {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+};
+
+// Default limits
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_FILES = 10;
+
 const FileUploadStatus: React.FC<FileUploadStatusProps> = ({
   uploading,
   fieldName,
@@ -26,11 +37,6 @@ const FileUploadStatus: React.FC<FileUploadStatusProps> = ({
   success,
   uploadedUrl,
 }) => {
-  const { tenantInfo, getStorageStatus } = useTenant();
-
-  if (!tenantInfo) return null;
-
-  const storageStatus = getStorageStatus();
   const isMultiple = files && files.length > 0;
   const currentFiles = isMultiple ? files : (file ? [file] : []);
 
@@ -41,13 +47,13 @@ const FileUploadStatus: React.FC<FileUploadStatusProps> = ({
     
     currentFiles.forEach((f, index) => {
       // Check file size
-      if (!isFileSizeValid(f, tenantInfo.limits.maxFileSize)) {
-        errors.push(`File ${index + 1}: Size exceeds ${formatFileSize(tenantInfo.limits.maxFileSize)} limit`);
+      if (f.size > MAX_FILE_SIZE) {
+        errors.push(`File ${index + 1}: Size exceeds ${formatFileSize(MAX_FILE_SIZE)} limit`);
       }
       
       // Check file type
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf'];
-      if (!isFileTypeAllowed(f, allowedTypes)) {
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml', 'application/pdf'];
+      if (!allowedTypes.includes(f.type)) {
         errors.push(`File ${index + 1}: Invalid file type. Only images and PDFs allowed`);
       }
     });
@@ -59,15 +65,6 @@ const FileUploadStatus: React.FC<FileUploadStatusProps> = ({
 
   return (
     <div className="space-y-3">
-      {/* Storage Status */}
-      <div className="flex items-center justify-between text-sm">
-        <span className="text-gray-600">Storage:</span>
-        <div className={`flex items-center ${storageStatus.color}`}>
-          <span className="mr-1">{storageStatus.icon}</span>
-          <span>{storageStatus.text}</span>
-        </div>
-      </div>
-
       {/* File Information */}
       {currentFiles.length > 0 && (
         <div className="space-y-2">
@@ -101,7 +98,7 @@ const FileUploadStatus: React.FC<FileUploadStatusProps> = ({
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
           <div className="flex items-center">
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-3"></div>
-            <span className="text-blue-800">Uploading to {storageStatus.text}...</span>
+            <span className="text-blue-800">Uploading...</span>
           </div>
         </div>
       )}
@@ -138,9 +135,8 @@ const FileUploadStatus: React.FC<FileUploadStatusProps> = ({
 
       {/* Storage Limits */}
       <div className="text-xs text-gray-500 space-y-1">
-        <div>Max file size: {formatFileSize(tenantInfo.limits.maxFileSize)}</div>
-        <div>Max files: {tenantInfo.limits.maxFiles}</div>
-        <div>Storage quota: {formatFileSize(tenantInfo.limits.storageQuota)}</div>
+        <div>Max file size: {formatFileSize(MAX_FILE_SIZE)}</div>
+        <div>Max files: {MAX_FILES}</div>
       </div>
     </div>
   );
