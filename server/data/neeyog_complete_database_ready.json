@@ -1,0 +1,1727 @@
+{
+  "categories": [
+    {
+      "category_id": "bakery_and_sweet",
+      "category_name": "Bakery & Sweet",
+      "category_slug": "bakery-sweet-products",
+      "category_url": "https://neeyog.com/product-category/bakery-sweet-products/",
+      "description": "Bakery & Sweet Products",
+      "image_url": "https://neeyog.com/wp-content/uploads/2019/01/IMG-20160723-WA0092.jpg",
+      "total_products": 424,
+      "total_subcategories": 13,
+      "subcategories": [
+        {
+          "subcategory_id": "bakery_and_sweet_bakable-products",
+          "subcategory_name": "Bakable Products",
+          "subcategory_slug": "bakable-products",
+          "subcategory_url": "https://neeyog.com/product-category/bakery-sweet-products/bakable-products/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/05/IMG-20190422-WA0016-500x449.jpg",
+          "product_count": 29
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "chocolate_packaging",
+      "category_name": "Chocolate Packaging",
+      "category_slug": "chocolate-packaging",
+      "category_url": "https://neeyog.com/product-category/chocolate-packaging/",
+      "description": "Chocolate Packaging",
+      "image_url": "https://neeyog.com/wp-content/uploads/2018/10/pl13370131-paperboard_chocolate_packaging_box.jpg",
+      "total_products": 303,
+      "total_subcategories": 10,
+      "subcategories": [
+        {
+          "subcategory_id": "chocolate_packaging_3d-double-mould",
+          "subcategory_name": "3D Double Mould",
+          "subcategory_slug": "3d-double-mould",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/3d-double-mould/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/05/H-26-3D-Santa-Claus-135-mm-500x375.jpg",
+          "product_count": 34,
+          "sample_products": [
+            {
+              "product_id": "12037",
+              "product_name": "3D Santa Claus 135 mm",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/3d-double-mould/3d-santa-claus-135-mm/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/05/H-26-3D-Santa-Claus-135-mm-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12039",
+              "product_name": "3D Santa Claus 150 mm",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/3d-double-mould/3d-santa-claus-150-mm/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/05/H-27-3D-Santa-Claus-150-mm-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11981",
+              "product_name": "Aladin Lamp Mould",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/3d-double-mould/aladin-lamp-mould/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/05/H-04-Aladin-Lamp-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_aluminum-wrapping-foil",
+          "subcategory_name": "Aluminum Wrapping Foil",
+          "subcategory_slug": "aluminum-wrapping-foil",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/aluminum-wrapping-foil/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Plain-2015a-500x440.jpg",
+          "product_count": 3,
+          "sample_products": [
+            {
+              "product_id": "10742",
+              "product_name": "Plain Foil",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/aluminum-wrapping-foil/plain-foil/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Plain-2015a-500x440.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10744",
+              "product_name": "Imported Food Grade Embossed & Printed Embossed Foil",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/aluminum-wrapping-foil/imported-food-grade-embossed-printed-embossed-foil/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Embossed-2015a-500x440.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10747",
+              "product_name": "Imported Food Grade Embossed & Printed Embossed Foil",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/aluminum-wrapping-foil/imported-food-grade-embossed-printed-embossed-foil-2/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Printed-Embossed-500x289.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_cacao-chocolate-moulds",
+          "subcategory_name": "Cacao Chocolate Moulds",
+          "subcategory_slug": "cacao-chocolate-moulds",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/cacao-chocolate-moulds/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/02/001.jpg",
+          "product_count": 2,
+          "sample_products": [
+            {
+              "product_id": "11197",
+              "product_name": "001",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/cacao-chocolate-moulds/mould-01/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/001.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11200",
+              "product_name": "002",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/cacao-chocolate-moulds/mould-02/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/002-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_cacao-structure-sheets",
+          "subcategory_name": "Cacao Structure Sheets",
+          "subcategory_slug": "cacao-structure-sheets",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/cacao-structure-sheets/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/06/NDS-01-500x374.jpg",
+          "product_count": 31,
+          "sample_products": [
+            {
+              "product_id": "12123",
+              "product_name": "Design # 01",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/cacao-structure-sheets/design-01/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/NDS-01-500x374.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12125",
+              "product_name": "Design # 02",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/cacao-structure-sheets/design-02/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/NDS-02-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12126",
+              "product_name": "Design # 03",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/cacao-structure-sheets/design-03/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/NDS-03-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_kareena-pvc-boxes",
+          "subcategory_name": "Kareena PVC Boxes",
+          "subcategory_slug": "kareena-pvc-boxes",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/kareena-pvc-boxes/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/02/F56-500x375.jpg",
+          "product_count": 33,
+          "sample_products": [
+            {
+              "product_id": "10882",
+              "product_name": "F-56",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/kareena-pvc-boxes/f-56/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/F56-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10884",
+              "product_name": "F-76",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/kareena-pvc-boxes/f-76/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/F76-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10887",
+              "product_name": "F-87",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/kareena-pvc-boxes/f-87/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/F-87-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_lollypop-sticks-&-stand",
+          "subcategory_name": "Lollypop Sticks & Stand",
+          "subcategory_slug": "lollypop-sticks-&-stand",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/lollypop-sticks-&-stand/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Lollypop-stand-01-500x375.jpg",
+          "product_count": 4,
+          "sample_products": [
+            {
+              "product_id": "11188",
+              "product_name": "Lollypop stand 16 Pcs & 32 Pcs",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/lollypop-sticks-stand/lollypop-stand-16-pcs-32-pcs/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Lollypop-stand-01-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11190",
+              "product_name": "Lollypop stand 16 Pcs & 32 Pcs",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/lollypop-sticks-stand/lollypop-stand-16-pcs-32-pcs-2/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Lollypop-stand-03-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11195",
+              "product_name": "Lollypop Sticks Paper 4.5″,6″, 9″ & 12″",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/lollypop-sticks-stand/lollypop-sticks-paper-4-56-9-12/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Paper-Sticks-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_metalised-trays",
+          "subcategory_name": "Metalised Trays",
+          "subcategory_slug": "metalised-trays",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/metalised-trays/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Octa-Dish-Big-D-1.jpg",
+          "product_count": 44,
+          "sample_products": [
+            {
+              "product_id": "8661",
+              "product_name": "Octa Dish Big (D-1)",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/metalised-trays/octa-dish-big-d-1/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Octa-Dish-Big-D-1.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8663",
+              "product_name": "Octa Dish Small (D-2)",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/metalised-trays/octa-dish-small-d-2/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Octa-Dish-Small-D-2.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8665",
+              "product_name": "Metallic Rectangle Dish (D-3)",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/metalised-trays/metallic-rectangle-dish-d-3/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Metallic-Rectangle-Dish-D-3.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_mita-pvc-boxes",
+          "subcategory_name": "Mita PVC Boxes",
+          "subcategory_slug": "mita-pvc-boxes",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/mita-pvc-boxes/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/02/010A01.jpg",
+          "product_count": 52,
+          "sample_products": [
+            {
+              "product_id": "10749",
+              "product_name": "010A01",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/mita-pvc-boxes/010a01/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/010A01.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10751",
+              "product_name": "010B01",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/mita-pvc-boxes/010b01/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/010B01.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10754",
+              "product_name": "010C01",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/mita-pvc-boxes/010c01/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/010C01.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_ribbons",
+          "subcategory_name": "Ribbons",
+          "subcategory_slug": "ribbons",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/ribbons/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/09/Its-a-girl-15mm-500x375.jpg",
+          "product_count": 4,
+          "sample_products": [
+            {
+              "product_id": "13754",
+              "product_name": "Its A Girl 15mm",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/ribbons/its-a-girl-15mm/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/09/Its-a-girl-15mm-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "13717",
+              "product_name": "Its A Boy 15mm",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/ribbons/its-a-boy-15mm/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/09/Its-a-boy-15mm-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "13756",
+              "product_name": "Its A Girl 25mm",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/ribbons/its-a-girl-25mm/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/09/Its-a-girl-25mm-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "chocolate_packaging_trays-&-boxes",
+          "subcategory_name": "Trays & Boxes",
+          "subcategory_slug": "trays-&-boxes",
+          "subcategory_url": "https://neeyog.com/product-category/chocolate-packaging/trays-&-boxes/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/02/D-Series-Trays-500x375.jpg",
+          "product_count": 96,
+          "sample_products": [
+            {
+              "product_id": "10955",
+              "product_name": "D-Series Trays",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/trays-boxes/d-series-trays/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/D-Series-Trays-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10957",
+              "product_name": "O-Series Trays (Metalised Gold)",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/trays-boxes/o-series-trays-metalised-gold/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/O-Series-Trays-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10959",
+              "product_name": "Covers for P,O,D Series Trays",
+              "product_url": "https://neeyog.com/product/chocolate-packaging/trays-boxes/covers-for-pod-series-trays/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Cover-500x375.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "bags",
+      "category_name": "Bags",
+      "category_slug": "bags",
+      "category_url": "https://neeyog.com/product-category/bags/",
+      "description": "Bags",
+      "image_url": "https://neeyog.com/wp-content/uploads/2018/10/elephant-fashion.jpg",
+      "total_products": 146,
+      "total_subcategories": 7,
+      "subcategories": [
+        {
+          "subcategory_id": "bags_d-cut-&-loop-bags",
+          "subcategory_name": "D Cut & Loop Bags",
+          "subcategory_slug": "d-cut-&-loop-bags",
+          "subcategory_url": "https://neeyog.com/product-category/bags/d-cut-&-loop-bags/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/01/5-FLAT-HANDLE-BAG-C060S0010-500x500.png",
+          "product_count": 14,
+          "sample_products": [
+            {
+              "product_id": "9063",
+              "product_name": "#5 Detpak Flat Handle Bag (C060S0010)",
+              "product_url": "https://neeyog.com/product/bags/flat-bag/detpak-5-flat-handle-bag-c060s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/5-FLAT-HANDLE-BAG-C060S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7272",
+              "product_name": "#60 Detpak Flat Handle Bag (C209S0010A)",
+              "product_url": "https://neeyog.com/product/bags/flat-bag/60-flat-handle-bag-c209s0010a/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/60-Flat-Handle-Bag-C209S0010A-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9087",
+              "product_name": "#75 Detpak Flat Handle Bag (C167S0010A)",
+              "product_url": "https://neeyog.com/product/bags/flat-bag/detpak-75-flat-handle-bag-c167s0010a/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/75-FLAT-HANDLE-BAG-C167S0010A-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "bags_flat-&-other-bags",
+          "subcategory_name": "Flat & Other Bags",
+          "subcategory_slug": "flat-&-other-bags",
+          "subcategory_url": "https://neeyog.com/product-category/bags/flat-&-other-bags/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-1-Flat-Bag-A549S0010-500x500.png",
+          "product_count": 52,
+          "sample_products": [
+            {
+              "product_id": "9207",
+              "product_name": "Detpak #1 Flat Bag (A549S0010)",
+              "product_url": "https://neeyog.com/product/bags/flat-other-bags/detpak-1-flat-bag-a549s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-1-Flat-Bag-A549S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7210",
+              "product_name": "Detpak #1 Flat Bag (A421S0201)",
+              "product_url": "https://neeyog.com/product/bags/flat-other-bags/1-flat-bag-a421s0201/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/1-Flat-Bag-A421S0201-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9229",
+              "product_name": "Detpak #1 Flat Bag (A421S0001)",
+              "product_url": "https://neeyog.com/product/bags/flat-other-bags/detpak-1-flat-bag-a421s0001/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-1-Flat-Bag-A421S0001-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "bags_grocery-bags",
+          "subcategory_name": "Grocery Bags",
+          "subcategory_slug": "grocery-bags",
+          "subcategory_url": "https://neeyog.com/product-category/bags/grocery-bags/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-250G-Retail-Bag-C003S0010-500x500.png",
+          "product_count": 4,
+          "sample_products": [
+            {
+              "product_id": "9264",
+              "product_name": "Detpak 250G Retail Bag (C003S0010)",
+              "product_url": "https://neeyog.com/product/bags/grocery-bags/detpak-250gm-retail-bag-c003s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-250G-Retail-Bag-C003S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9266",
+              "product_name": "Detpak 500G Retail Bag (C591S0010)",
+              "product_url": "https://neeyog.com/product/bags/grocery-bags/detpak-500g-retail-bag-c591s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-500G-Retail-Bag-C591S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9272",
+              "product_name": "Detpak 1KG Retail Bag (C435S0010)",
+              "product_url": "https://neeyog.com/product/bags/grocery-bags/detpak-1kg-retail-bag-c435s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-1KG-Retail-Bag-C435S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "bags_sos-bags",
+          "subcategory_name": "SOS Bags",
+          "subcategory_slug": "sos-bags",
+          "subcategory_url": "https://neeyog.com/product-category/bags/sos-bags/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2025/02/2024_04_04_17_27_20_20240404_172606_0000.png",
+          "product_count": 20,
+          "sample_products": [
+            {
+              "product_id": "21914",
+              "product_name": "Square Bottom SOS MF Kraft Paper Bag",
+              "product_url": "https://neeyog.com/product/bags/sos-bag/square-bottom-sos-bag/square-bottom-sos-mf-kraft-paper-bag/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2025/02/2024_04_04_17_27_20_20240404_172606_0000.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9218",
+              "product_name": "V bottom MF Kraft bag 60 GSM",
+              "product_url": "https://neeyog.com/product/bags/sos-bag/v-bottom/v-bottom-mf-kraft-bag-60-gsm/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/1.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9023",
+              "product_name": "Detpak #4 SOS Bag (C589S0010)",
+              "product_url": "https://neeyog.com/product/bags/sos-bag/detpak-4-sos-bag-c589s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/4-SOS-BAG-C589S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "bags_satchel-bags",
+          "subcategory_name": "Satchel Bags",
+          "subcategory_slug": "satchel-bags",
+          "subcategory_url": "https://neeyog.com/product-category/bags/satchel-bags/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/Medium-Butcher-HWS-Satchel-Bag-B192S0197-500x500.png",
+          "product_count": 4,
+          "sample_products": [
+            {
+              "product_id": "7330",
+              "product_name": "Detpak Medium Butcher HWS Satchel Bag (B192S0197)",
+              "product_url": "https://neeyog.com/product/bags/satchel-bag/medium-butcher-hws-satchel-bag-b192s0197/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/Medium-Butcher-HWS-Satchel-Bag-B192S0197-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7284",
+              "product_name": "Detpak Amga Mushroom Strung Satchel Bag (B196S0196A)",
+              "product_url": "https://neeyog.com/product/bags/satchel-bag/amga-mushroom-strung-satchel-bag-b196s0196a/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/Amga-Mushroom-Strung-Satchel-Bag-B196S0196A-e1545047941542-500x363.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9145",
+              "product_name": "Detpak Pie Grease Resistant Stachel Bag (A405P0001)",
+              "product_url": "https://neeyog.com/product/bags/satchel-bag/detpak-pie-grease-resistant-flat-bag-a405p0001/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-Pie-Grease-Resistant-Flat-Bag-A405P0001-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "bags_strung-bags",
+          "subcategory_name": "Strung Bags",
+          "subcategory_slug": "strung-bags",
+          "subcategory_url": "https://neeyog.com/product-category/bags/strung-bags/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-1-Strung-Square-Greaseproof-Flat-Bag-A230S0010-500x500.png",
+          "product_count": 25,
+          "sample_products": [
+            {
+              "product_id": "9235",
+              "product_name": "Detpak #1 Strung Square Greaseproof Flat Bag (A230S0001)",
+              "product_url": "https://neeyog.com/product/bags/strung-bags/detpak-1-strung-square-greaseproof-flat-bag-a230s0001/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-1-Strung-Square-Greaseproof-Flat-Bag-A230S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9025",
+              "product_name": "Detpak #1/2 Strung Long Greaseproof Flat Bag (A476S0010)",
+              "product_url": "https://neeyog.com/product/bags/strung-bags/1-2-strung-long-greaseproof-flat-bag-a476s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/1-2-half-STRUNG-LONG-GREASEPROOF-FLAT-BAG-A476S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9194",
+              "product_name": "Detpak #3 Strung Flat Bag (A421S0010B)",
+              "product_url": "https://neeyog.com/product/bags/strung-bags/detpak-3-strung-flat-bag-a421s0010b/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-3-Strung-Flat-Bag-A421S0010B-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "bags_window-bags",
+          "subcategory_name": "Window Bags",
+          "subcategory_slug": "window-bags",
+          "subcategory_url": "https://neeyog.com/product-category/bags/window-bags/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/01/SMALL-WINDOW-RETAIL-BAG-C474S0010-500x500.png",
+          "product_count": 27,
+          "sample_products": [
+            {
+              "product_id": "8983",
+              "product_name": "Detpak Small Window Retail Bag (C474S0010)",
+              "product_url": "https://neeyog.com/product/bags/window-bag/small-window-retail-bag-c474s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/SMALL-WINDOW-RETAIL-BAG-C474S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9137",
+              "product_name": "Detpak Small Window Tin-Tie Bag (C644S0010)",
+              "product_url": "https://neeyog.com/product/bags/window-bag/detpak-small-window-tin-tie-bag-c644s0010/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Detpak-Small-Window-Tin-Tie-Bag-C644S0010-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9001",
+              "product_name": "Detpak Small Windlow Tin-Tie Eco Bag (C433S0231)",
+              "product_url": "https://neeyog.com/product/bags/window-bag/small-windlow-tin-tie-bag-c433s0231/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Small-Windlow-Tin-Tie-Bag-C433S0231-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "plates_and_bowls",
+      "category_name": "Plates & Bowls",
+      "category_slug": "plates-bowls",
+      "category_url": "https://neeyog.com/product-category/plates-bowls/",
+      "description": "Plates & Bowls",
+      "image_url": "https://neeyog.com/wp-content/uploads/2019/01/746021.jpg",
+      "total_products": 96,
+      "total_subcategories": 5,
+      "subcategories": [
+        {
+          "subcategory_id": "plates_and_bowls_areca-products",
+          "subcategory_name": "Areca Products",
+          "subcategory_slug": "areca-products",
+          "subcategory_url": "https://neeyog.com/product-category/plates-bowls/areca-products/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/RWB0320_2__67567.1459782723.220.290-1.jpg",
+          "product_count": 18,
+          "sample_products": [
+            {
+              "product_id": "7734",
+              "product_name": "4″ Round Areca Bowl",
+              "product_url": "https://neeyog.com/product/plates-bowls/areca-dinnerware-tableware/4-round-areca-bowl/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/RWB0320_2__67567.1459782723.220.290-1.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8775",
+              "product_name": "5″ Round Areca Bowl",
+              "product_url": "https://neeyog.com/product/plates-bowls/areca-dinnerware-tableware/5-round-areca-bowl/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/5inchroundbowl.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8777",
+              "product_name": "7″ Round Areca Bowl",
+              "product_url": "https://neeyog.com/product/plates-bowls/areca-dinnerware-tableware/7-round-areca-bowl/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/7inchroundbowl.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "plates_and_bowls_bagasse-products",
+          "subcategory_name": "Bagasse Products",
+          "subcategory_slug": "bagasse-products",
+          "subcategory_url": "https://neeyog.com/product-category/plates-bowls/bagasse-products/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2020/05/Dinearth-Website-Images_50-ml-Bowl-500x319.jpg",
+          "product_count": 54,
+          "sample_products": [
+            {
+              "product_id": "16250",
+              "product_name": "Dinearth 50ml Ketchup Wati",
+              "product_url": "https://neeyog.com/product/plates-bowls/bagasse-products/dineearth-50ml-ketchup-wati/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/05/Dinearth-Website-Images_50-ml-Bowl-500x319.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "16328",
+              "product_name": "Dinearth 100ML Cup",
+              "product_url": "https://neeyog.com/product/plates-bowls/bagasse-products/dinearth-100ml-cup/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/05/Dinearth-100ml-bowl-1.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11288",
+              "product_name": "Dinearth 6OZ 180ML Bowl",
+              "product_url": "https://neeyog.com/product/plates-bowls/bagasse-products/dinearth-6oz-180ml-bowl/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/03/IMG-20190318-WA0032-500x445.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "plates_and_bowls_paper-products",
+          "subcategory_name": "Paper Products",
+          "subcategory_slug": "paper-products",
+          "subcategory_url": "https://neeyog.com/product-category/plates-bowls/paper-products/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/Biosuper-Paper-Dona-500x333.jpg",
+          "product_count": 14,
+          "sample_products": [
+            {
+              "product_id": "7809",
+              "product_name": "Super Bio 4 x 4 Paper Dona",
+              "product_url": "https://neeyog.com/product/plates-bowls/paper-products/super-bio-4-x-4-dona/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/Biosuper-Paper-Dona-500x333.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7803",
+              "product_name": "Super Bio 150ml Paper Bowl",
+              "product_url": "https://neeyog.com/product/plates-bowls/paper-products/150ml-biosuper-paper-bowl/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/150ml-Biosuper-Paper-Bowl-500x333.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7804",
+              "product_name": "Super Bio 240ml  Paper Bowl",
+              "product_url": "https://neeyog.com/product/plates-bowls/paper-products/240ml-biosuper-paper-bowl/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/240ml-Biosuper-Paper-Bowl-500x333.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "plates_and_bowls_pinewood-products",
+          "subcategory_name": "Pinewood Products",
+          "subcategory_slug": "pinewood-products",
+          "subcategory_url": "https://neeyog.com/product-category/plates-bowls/pinewood-products/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/03/3Inch-Pinewood-Cone-500x500.jpg",
+          "product_count": 6,
+          "sample_products": [
+            {
+              "product_id": "11370",
+              "product_name": "3″ Pinewood Cone",
+              "product_url": "https://neeyog.com/product/plates-bowls/pinewood-products/3%e2%80%b3-pinewood-cone/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/03/3Inch-Pinewood-Cone-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8823",
+              "product_name": "5″ Pinewood Cone",
+              "product_url": "https://neeyog.com/product/plates-bowls/pinewood-products/5-pinewood-cone/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/5Inch-Pinewood-Cone-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8826",
+              "product_name": "6″ Pinewood Cone",
+              "product_url": "https://neeyog.com/product/plates-bowls/pinewood-products/6-pinewood-cone/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/6Inch-Pinewood-Cone-2-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "plates_and_bowls_sal-leaf-products",
+          "subcategory_name": "Sal Leaf Products",
+          "subcategory_slug": "sal-leaf-products",
+          "subcategory_url": "https://neeyog.com/product-category/plates-bowls/sal-leaf-products/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/06/4round-sal-leaf-bowl2-500x306.jpg",
+          "product_count": 4,
+          "sample_products": [
+            {
+              "product_id": "12481",
+              "product_name": "4″ Round Sal Leaf Bowl",
+              "product_url": "https://neeyog.com/product/plates-bowls/sal-leaf-products/4-round-sal-leaf-bowl/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/4round-sal-leaf-bowl2-500x306.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12485",
+              "product_name": "6″ Round Sal Leaf Plate",
+              "product_url": "https://neeyog.com/product/plates-bowls/sal-leaf-products/6-round-sal-leaf-plate/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/6round-sal-leaf-plate3-500x306.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12495",
+              "product_name": "8.5″ Round Sal Leaf Plate",
+              "product_url": "https://neeyog.com/product/plates-bowls/sal-leaf-products/8-5-round-sal-leaf-plate/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/8-5round-sal-leaf-plate3-500x306.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "takeaway",
+      "category_name": "Takeaway",
+      "category_slug": "takeaway",
+      "category_url": "https://neeyog.com/product-category/takeaway/",
+      "description": "Takeaway",
+      "image_url": "https://neeyog.com/wp-content/uploads/2019/01/8CP-Meal-Tray-Natraj-Black-3-new-2.jpg",
+      "total_products": 76,
+      "total_subcategories": 5,
+      "subcategories": [
+        {
+          "subcategory_id": "takeaway_meal-trays-with-lid-recyclable",
+          "subcategory_name": "Meal Trays With Lid (Recyclable)",
+          "subcategory_slug": "meal-trays-with-lid-recyclable",
+          "subcategory_url": "https://neeyog.com/product-category/takeaway/meal-trays-with-lid-recyclable/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/3CP-Meal-Tray-Talash-500x332.png",
+          "product_count": 16,
+          "sample_products": [
+            {
+              "product_id": "7563",
+              "product_name": "3CP Meal Tray Talash",
+              "product_url": "https://neeyog.com/product/takeaway/meal-trays-with-lid/3cp-meal-tray-talash/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/3CP-Meal-Tray-Talash-500x332.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7432",
+              "product_name": "2CP Hips Meal Tray",
+              "product_url": "https://neeyog.com/product/takeaway/meal-trays-with-lid/2cp-hips-meal-tray/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/2CP-Hips-Meal-Tray-1-500x372.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "14474",
+              "product_name": "2CP Meal Tray Natraj",
+              "product_url": "https://neeyog.com/product/takeaway/meal-trays-with-lid/2cp-meal-tray-natraj/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/10/IMG-20191012-WA0004-500x662.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "takeaway_other-containers-recyclable",
+          "subcategory_name": "Other Containers (Recyclable)",
+          "subcategory_slug": "other-containers-recyclable",
+          "subcategory_url": "https://neeyog.com/product-category/takeaway/other-containers-recyclable/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/Wavy-Box-500x322.png",
+          "product_count": 5,
+          "sample_products": [
+            {
+              "product_id": "7687",
+              "product_name": "Wavy Box",
+              "product_url": "https://neeyog.com/product/takeaway/other-containers/wavy-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/Wavy-Box-500x322.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7686",
+              "product_name": "800ML Talash Hinged Box",
+              "product_url": "https://neeyog.com/product/takeaway/other-containers/800ml-talash-hinged-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/800ML-Talash-Hinged-Box-500x383.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12341",
+              "product_name": "Matka Container 125ML",
+              "product_url": "https://neeyog.com/product/takeaway/other-containers/matka-container-125ml/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/125-ml-matka-kulfi-ice-cream-containers-500x500-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "takeaway_round-containers-recyclable",
+          "subcategory_name": "Round Containers (Recyclable)",
+          "subcategory_slug": "round-containers-recyclable",
+          "subcategory_url": "https://neeyog.com/product-category/takeaway/round-containers-recyclable/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/25ML-PP-Container-with-attached-Lid-500x500.jpg",
+          "product_count": 15,
+          "sample_products": [
+            {
+              "product_id": "7663",
+              "product_name": "25ML PP Food Container",
+              "product_url": "https://neeyog.com/product/takeaway/round-containers/25ml-pp-food-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/25ML-PP-Container-with-attached-Lid-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7666",
+              "product_name": "50ML PP Food Container",
+              "product_url": "https://neeyog.com/product/takeaway/round-containers/50ml-pp-food-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/50ML-PP-Container-with-attached-Lid.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12658",
+              "product_name": "100ML PP Food Container",
+              "product_url": "https://neeyog.com/product/takeaway/round-containers/100ml-pp-food-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/07/100ML-PP-Food-Containe-500x633.jpeg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "takeaway_sealable-meal-trays---containers-recyclable",
+          "subcategory_name": "Sealable Meal Trays / Containers (Recyclable)",
+          "subcategory_slug": "sealable-meal-trays---containers-recyclable",
+          "subcategory_url": "https://neeyog.com/product-category/takeaway/sealable-meal-trays---containers-recyclable/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/05/55726358_576403986190065_2222420691192381440_n-500x333.jpg",
+          "product_count": 9,
+          "sample_products": [
+            {
+              "product_id": "11782",
+              "product_name": "300 ML Oval Sealable Tray",
+              "product_url": "https://neeyog.com/product/takeaway/sealable-meal-trays/300-ml-oval-sealable-tray/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/05/55726358_576403986190065_2222420691192381440_n-500x333.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11784",
+              "product_name": "500 ML Oval Sealable Tray",
+              "product_url": "https://neeyog.com/product/takeaway/sealable-meal-trays/500-ml-oval-sealable-tray/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/05/55831599_576404026190061_2807591735956340736_n-500x333.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11785",
+              "product_name": "1000 ML Oval Sealable Tray",
+              "product_url": "https://neeyog.com/product/takeaway/sealable-meal-trays/1000-ml-oval-sealable-tray/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/05/55865088_576403949523402_5302732327774846976_n-500x333.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "takeaway_thinwall-containers-recyclable",
+          "subcategory_name": "Thinwall Containers (Recyclable)",
+          "subcategory_slug": "thinwall-containers-recyclable",
+          "subcategory_url": "https://neeyog.com/product-category/takeaway/thinwall-containers-recyclable/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/DP-CC-2oz-50ML-B-500x333.jpg",
+          "product_count": 31,
+          "sample_products": [
+            {
+              "product_id": "7621",
+              "product_name": "50ML 2-OZ Round Food Containers",
+              "product_url": "https://neeyog.com/product/takeaway/thinwall-containers/dp-cc-2oz-50ml-b/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/DP-CC-2oz-50ML-B-500x333.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8924",
+              "product_name": "500ML C Food Container",
+              "product_url": "https://neeyog.com/product/takeaway/thinwall-containers/500ml-c-food-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/C-500ML-FOOD-CONTAINER-B-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8928",
+              "product_name": "650ML C Food Container",
+              "product_url": "https://neeyog.com/product/takeaway/thinwall-containers/650ml-c-food-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/C-650MLFOOD-CONTAINER-B-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "grab_and_go",
+      "category_name": "Grab & Go",
+      "category_slug": "grab-go",
+      "category_url": "https://neeyog.com/product-category/grab-go/",
+      "description": "Grab & Go",
+      "image_url": "https://neeyog.com/wp-content/uploads/2019/02/XSmall-1.png",
+      "total_products": 57,
+      "total_subcategories": 6,
+      "subcategories": [
+        {
+          "subcategory_id": "grab_and_go_bagasse-boxes",
+          "subcategory_name": "Bagasse Boxes",
+          "subcategory_slug": "bagasse-boxes",
+          "subcategory_url": "https://neeyog.com/product-category/grab-go/bagasse-boxes/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2021/05/ZUME_500ml-SM-Bowl_wLid-2_PRINT-500x360.jpg",
+          "product_count": 13,
+          "sample_products": [
+            {
+              "product_id": "19675",
+              "product_name": "Zume 500ml Bowl with Lid",
+              "product_url": "https://neeyog.com/product/grab-go/bagasse-boxes/zume-500ml-bowl-with-lid/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2021/05/ZUME_500ml-SM-Bowl_wLid-2_PRINT-500x360.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "19695",
+              "product_name": "Zume 750ml Bowl with Lid",
+              "product_url": "https://neeyog.com/product/grab-go/bagasse-boxes/zume-750ml-bowl-with-lid/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2021/05/ZUME_750ml-MD-Bowl_wLid_PRINT-500x330.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "16523",
+              "product_name": "Dinearth 340ML Container with Lid",
+              "product_url": "https://neeyog.com/product/grab-go/bagasse-boxes/dinearth-340ml-container-with-lid/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/06/350ml-Dinearth-Cont-with-Lid-500x500.jpeg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "grab_and_go_packnserve-exclusive-products",
+          "subcategory_name": "Packnserve Exclusive Products",
+          "subcategory_slug": "packnserve-exclusive-products",
+          "subcategory_url": "https://neeyog.com/product-category/grab-go/packnserve-exclusive-products/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Burger-Box-JP-1.jpg",
+          "product_count": 18,
+          "sample_products": [
+            {
+              "product_id": "10532",
+              "product_name": "Burger Box JP-1",
+              "product_url": "https://neeyog.com/product/grab-go/pack-serve-exclusive-products/jp-1-burger-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Burger-Box-JP-1.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10545",
+              "product_name": "Snack Box Small JP-2",
+              "product_url": "https://neeyog.com/product/grab-go/pack-serve-exclusive-products/snack-box-small-jp-2/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Snack-Box-Small-JP-2.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "10548",
+              "product_name": "Snack Box Big JP-3",
+              "product_url": "https://neeyog.com/product/grab-go/pack-serve-exclusive-products/snack-box-big-jp-3/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/02/Snack-Box-Big-JP-3.1.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "grab_and_go_pizza-boxes",
+          "subcategory_name": "Pizza Boxes",
+          "subcategory_slug": "pizza-boxes",
+          "subcategory_url": "https://neeyog.com/product-category/grab-go/pizza-boxes/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2025/03/PIZZA-BOX-20.jpg",
+          "product_count": 11,
+          "sample_products": [
+            {
+              "product_id": "22063",
+              "product_name": "Pizza Box",
+              "product_url": "https://neeyog.com/product/grab-go/pizza-boxes/pizza-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2025/03/PIZZA-BOX-20.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11582",
+              "product_name": "7″ Pizza Box",
+              "product_url": "https://neeyog.com/product/grab-go/pizza-boxes/7%e2%80%b3-pizza-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/04/9-inch-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11570",
+              "product_name": "8″ Pizza Box",
+              "product_url": "https://neeyog.com/product/grab-go/pizza-boxes/8-pizza-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/04/51w7Md0mHqL-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "grab_and_go_pop-corn-tub",
+          "subcategory_name": "Pop Corn Tub",
+          "subcategory_slug": "pop-corn-tub",
+          "subcategory_url": "https://neeyog.com/product-category/grab-go/pop-corn-tub/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/32OZ-Popcorn-Tub.jpg",
+          "product_count": 5,
+          "sample_products": [
+            {
+              "product_id": "7536",
+              "product_name": "32 OZ Popcorn Tub",
+              "product_url": "https://neeyog.com/product/grab-go/pop-corn-tub/32oz-popcorn-tub/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/32OZ-Popcorn-Tub.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7538",
+              "product_name": "46 OZ Popcorn Tub",
+              "product_url": "https://neeyog.com/product/grab-go/pop-corn-tub/46oz-popcorn-tub/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/46OZ-Popcorn-Tub-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7540",
+              "product_name": "50 OZ Popcorn Tub",
+              "product_url": "https://neeyog.com/product/grab-go/pop-corn-tub/50oz-popcorn-tub/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/50OZ-Popcorn-Tub.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "grab_and_go_round-paper-containers",
+          "subcategory_name": "Round Paper Containers",
+          "subcategory_slug": "round-paper-containers",
+          "subcategory_url": "https://neeyog.com/product-category/grab-go/round-paper-containers/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/6OZ-180ML-Paper-Container-Brown-500x500.jpg",
+          "product_count": 7,
+          "sample_products": [
+            {
+              "product_id": "7510",
+              "product_name": "6 OZ 180ML Paper Container Brown",
+              "product_url": "https://neeyog.com/product/grab-go/%e2%86%92round-paper-containers/6oz-180ml-paper-container-brown/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/6OZ-180ML-Paper-Container-Brown-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7512",
+              "product_name": "8 OZ 240ML Paper Container",
+              "product_url": "https://neeyog.com/product/grab-go/%e2%86%92round-paper-containers/8oz-240ml-paper-container-brown/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/8OZ-240ML-Paper-Container-Brown-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7517",
+              "product_name": "350ML Paper Container",
+              "product_url": "https://neeyog.com/product/grab-go/%e2%86%92round-paper-containers/350ml-paper-container-brown/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/350ML-Paper-Container-Brown.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "grab_and_go_wok-noodles-boxes",
+          "subcategory_name": "Wok/Noodles Boxes",
+          "subcategory_slug": "wok-noodles-boxes",
+          "subcategory_url": "https://neeyog.com/product-category/grab-go/wok-noodles-boxes/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/16OZ-480ML-Noodle-Box.jpg",
+          "product_count": 3,
+          "sample_products": [
+            {
+              "product_id": "7504",
+              "product_name": "16 OZ 480ML Noodle Box",
+              "product_url": "https://neeyog.com/product/grab-go/wok-noodles-boxes/16oz-480ml-noodle-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/16OZ-480ML-Noodle-Box.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7506",
+              "product_name": "26 OZ 720ML Noodle Box",
+              "product_url": "https://neeyog.com/product/grab-go/wok-noodles-boxes/26oz-720ml-noodle-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/26OZ-720ML-Noodle-Box-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "7508",
+              "product_name": "32 OZ 960ML Noodle Box",
+              "product_url": "https://neeyog.com/product/grab-go/wok-noodles-boxes/32oz-960ml-noodle-box/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/32OZ-960ML-Noodle-Box-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "aluminium",
+      "category_name": "Aluminium",
+      "category_slug": "aluminium-foil-containers",
+      "category_url": "https://neeyog.com/product-category/aluminium-foil-containers/",
+      "description": "Aluminium Products",
+      "image_url": "https://neeyog.com/wp-content/uploads/2019/01/06.jpg",
+      "total_products": 40,
+      "total_subcategories": 3,
+      "subcategories": [
+        {
+          "subcategory_id": "aluminium_aluminium-foils",
+          "subcategory_name": "Aluminium Foils",
+          "subcategory_slug": "aluminium-foils",
+          "subcategory_url": "https://neeyog.com/product-category/aluminium-foil-containers/aluminium-foils/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Superwrap-9m-500x186.jpg",
+          "product_count": 11,
+          "sample_products": [
+            {
+              "product_id": "9453",
+              "product_name": "Superwrap 9m",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/aluminium-foils/superwrap-9m/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Superwrap-9m-500x186.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9457",
+              "product_name": "Superwrap 18m Wrapper",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/aluminium-foils/superwrap-18m-wrapper/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Superwrap-18m-Wrapper-500x186.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9463",
+              "product_name": "Superwrap 72m (290mm width)",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/aluminium-foils/superwrap-72m-290mm-width/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Superwrap-72m-290mm-width-500x186.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "aluminium_exclusive-containers",
+          "subcategory_name": "Exclusive Containers",
+          "subcategory_slug": "exclusive-containers",
+          "subcategory_url": "https://neeyog.com/product-category/aluminium-foil-containers/exclusive-containers/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/10/40No-Foil-Container-1-500x372.jpg",
+          "product_count": 20,
+          "sample_products": [
+            {
+              "product_id": "6022",
+              "product_name": "40 No",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/exclusive-products/40no-foil-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/10/40No-Foil-Container-1-500x372.jpg",
+              "price": "₹150.00Original price was: ₹150.00.₹105.00Current price is: ₹105.00.",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "6024",
+              "product_name": "41 No",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/exclusive-products/41no-foil-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/10/41No-Foil-Container-1-500x396.jpg",
+              "price": "₹150.00Original price was: ₹150.00.₹105.00Current price is: ₹105.00.",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "9326",
+              "product_name": "100ML Railway Foil Container",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/exclusive-products/100ml-railway-foil-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/100ML-Railway-Foil-Container-500x250.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "aluminium_regular-containers",
+          "subcategory_name": "Regular Containers",
+          "subcategory_slug": "regular-containers",
+          "subcategory_url": "https://neeyog.com/product-category/aluminium-foil-containers/regular-containers/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/11/120ml-Foil-Container-500x386.jpg",
+          "product_count": 9,
+          "sample_products": [
+            {
+              "product_id": "6412",
+              "product_name": "120ML Foil Container",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/regular-products/120ml-foil-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/11/120ml-Foil-Container-500x386.jpg",
+              "price": "₹150.00Original price was: ₹150.00.₹100.00Current price is: ₹100.00.",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "6404",
+              "product_name": "180ML Foil Container",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/regular-products/180ml-foil-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/11/180ml-Foil-Container-500x402.jpg",
+              "price": "₹150.00Original price was: ₹150.00.₹100.00Current price is: ₹100.00.",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "6414",
+              "product_name": "250ML Foil Container",
+              "product_url": "https://neeyog.com/product/aluminium-foil-containers/regular-products/250ml-foil-container/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/11/250ML-Foil-Container-500x334.png",
+              "price": "₹150.00Original price was: ₹150.00.₹100.00Current price is: ₹100.00.",
+              "stock_status": "instock"
+            }
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "cutlery",
+      "category_name": "Cutlery",
+      "category_slug": "cutlery",
+      "category_url": "https://neeyog.com/product-category/cutlery/",
+      "description": "Cutlery",
+      "image_url": "https://neeyog.com/wp-content/uploads/2019/01/WoodenCutlery_2048x.png",
+      "total_products": 19,
+      "total_subcategories": 6,
+      "subcategories": [
+        {
+          "subcategory_id": "cutlery_biodegradable-corn-starch-cutlery",
+          "subcategory_name": "Biodegradable Corn Starch Cutlery",
+          "subcategory_slug": "biodegradable-corn-starch-cutlery",
+          "subcategory_url": "https://neeyog.com/product-category/cutlery/biodegradable-corn-starch-cutlery/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Healthy-Biodegradable-Corn-Starch-Spoon-500x500.jpg",
+          "product_count": 1,
+          "sample_products": [
+            {
+              "product_id": "9687",
+              "product_name": "Biodegradable Corn Starch Spoon",
+              "product_url": "https://neeyog.com/product/cutlery/biodegradable-corn-starch-cutlery/healthy-biodegradable-corn-starch-spoon/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Healthy-Biodegradable-Corn-Starch-Spoon-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "cutlery_cutlery-kit",
+          "subcategory_name": "Cutlery Kit",
+          "subcategory_slug": "cutlery-kit",
+          "subcategory_url": "https://neeyog.com/product-category/cutlery/cutlery-kit/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/210COUVB3K-packnwood-wrapper-500x558.jpg",
+          "product_count": 1,
+          "sample_products": [
+            {
+              "product_id": "6752",
+              "product_name": "Cutlery Set",
+              "product_url": "https://neeyog.com/product/cutlery/cutlery-kit/210couvb3k-packnwood-wrapper/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/210COUVB3K-packnwood-wrapper-500x558.jpg",
+              "price": "₹150.00Original price was: ₹150.00.₹100.00Current price is: ₹100.00.",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "cutlery_mukhwas-sachets",
+          "subcategory_name": "Mukhwas Sachets",
+          "subcategory_slug": "mukhwas-sachets",
+          "subcategory_url": "https://neeyog.com/product-category/cutlery/mukhwas-sachets/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/03/0_0_productGfx_17c92d47dbcc16cf088a48829fa6ff06-500x500.jpg",
+          "product_count": 5,
+          "sample_products": [
+            {
+              "product_id": "11544",
+              "product_name": "Dark Jewels (Sachets)",
+              "product_url": "https://neeyog.com/product/cutlery/mukhwas-sachets/dark-jewels-sachets/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/03/0_0_productGfx_17c92d47dbcc16cf088a48829fa6ff06-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11548",
+              "product_name": "Elaichi Souf (Sachets – Each 3g)",
+              "product_url": "https://neeyog.com/product/cutlery/mukhwas-sachets/elaichi-souf-sachets-each-3g/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/03/0_0_productGfx_00593353876b2319e299de0fbffe715e-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "11551",
+              "product_name": "Jet Minty Fresh (Sachets Each 3g)",
+              "product_url": "https://neeyog.com/product/cutlery/mukhwas-sachets/jet-minty-fresh-sachets-each-3g/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/03/0_0_productGfx_a9edab03fb6a6308a72510c3f72b2ef0-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "cutlery_oxo-biodegradable-cutlery",
+          "subcategory_name": "Oxo Biodegradable Cutlery",
+          "subcategory_slug": "oxo-biodegradable-cutlery",
+          "subcategory_url": "https://neeyog.com/product-category/cutlery/oxo-biodegradable-cutlery/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/05/biodegradable-spoon-500x500-500x500.jpg",
+          "product_count": 1,
+          "sample_products": [
+            {
+              "product_id": "11871",
+              "product_name": "Oxo Biodegradable Spoon",
+              "product_url": "https://neeyog.com/product/cutlery/oxo-biodegradable-spoon/oxo-biodegradable-spoon/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/05/biodegradable-spoon-500x500-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "cutlery_plastic-cutlery",
+          "subcategory_name": "Plastic Cutlery",
+          "subcategory_slug": "plastic-cutlery",
+          "subcategory_url": "https://neeyog.com/product-category/cutlery/plastic-cutlery/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2018/12/71pye4fAqML._SL1500_-500x445.jpg",
+          "product_count": 2,
+          "sample_products": [
+            {
+              "product_id": "6776",
+              "product_name": "Hard Disposable Spoon & Fork",
+              "product_url": "https://neeyog.com/product/cutlery/plastic-cutlery/71pye4faqml-_sl1500_/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/71pye4fAqML._SL1500_-500x445.jpg",
+              "price": "₹150.00Original price was: ₹150.00.₹100.00Current price is: ₹100.00.",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "6813",
+              "product_name": "Deccan Hard Spoon",
+              "product_url": "https://neeyog.com/product/cutlery/plastic-cutlery/img-20160802-wa0013/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/IMG-20160802-WA0013-500x434.jpg",
+              "price": "₹150.00Original price was: ₹150.00.₹100.00Current price is: ₹100.00.",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "cutlery_wooden-cutlery",
+          "subcategory_name": "Wooden Cutlery",
+          "subcategory_slug": "wooden-cutlery",
+          "subcategory_url": "https://neeyog.com/product-category/cutlery/wooden-cutlery/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/07/Fawda-Ice-Cream-Spoon-9.5cm.jpeg",
+          "product_count": 9,
+          "sample_products": [
+            {
+              "product_id": "12866",
+              "product_name": "Fawda Ice Cream Spoon 9.5 cm",
+              "product_url": "https://neeyog.com/product/cutlery/wooden-cutlery/fawda-ice-cream-spoon-9-5-cm/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/07/Fawda-Ice-Cream-Spoon-9.5cm.jpeg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "8779",
+              "product_name": "Wooden Spoon 12CM",
+              "product_url": "https://neeyog.com/product/cutlery/wooden-cutlery/wooden-spoon-12cms/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/01/11cm-Wooden-Spoon-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "6857",
+              "product_name": "Wooden Spoon 14CM",
+              "product_url": "https://neeyog.com/product/cutlery/wooden-cutlery/spoons_main-image_150__nologo_600x2x/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2018/12/Spoons_main-image_150__nologo_600x@2x-500x484.jpg",
+              "price": "₹150.00Original price was: ₹150.00.₹100.00Current price is: ₹100.00.",
+              "stock_status": "instock"
+            }
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "safety_and_hygiene",
+      "category_name": "Safety & Hygiene",
+      "category_slug": "safety-hygiene-products",
+      "category_url": "https://neeyog.com/product-category/safety-hygiene-products/",
+      "description": "Safety & Hygiene",
+      "image_url": "https://neeyog.com/wp-content/uploads/2020/05/handkleen-rub-brochure-1.png",
+      "total_products": 16,
+      "total_subcategories": 5,
+      "subcategories": [
+        {
+          "subcategory_id": "safety_and_hygiene_face-protection",
+          "subcategory_name": "Face Protection",
+          "subcategory_slug": "face-protection",
+          "subcategory_url": "https://neeyog.com/product-category/safety-hygiene-products/face-protection/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2020/06/Face-Mask-500x304.jpeg",
+          "product_count": 3,
+          "sample_products": [
+            {
+              "product_id": "16466",
+              "product_name": "N95 Reusable Face Mask",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/face-protection/n95-reusable-face-mask/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/06/Face-Mask-500x304.jpeg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "16402",
+              "product_name": "3Ply Meltblown Face Mask with Nose Pin",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/face-protection/3ply-meltblown-face-mask-with-nose-pin/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/05/Melt-Blown-Fabric-Disposable-3-Ply-Face-Mask-500x396.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "16351",
+              "product_name": "Safe Care Face Shield With Velcro",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/face-protection/face-shield-with-velcro/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/05/Face-Shield-2-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "safety_and_hygiene_fogger-machine",
+          "subcategory_name": "Fogger Machine",
+          "subcategory_slug": "fogger-machine",
+          "subcategory_url": "https://neeyog.com/product-category/safety-hygiene-products/fogger-machine/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2020/05/ULV-Fogger-Machine-1-2-500x506.jpg",
+          "product_count": 1,
+          "sample_products": [
+            {
+              "product_id": "16301",
+              "product_name": "ULV Fogging Machine",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/ulv-fogger-machine/ulv-fogging-machine/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/05/ULV-Fogger-Machine-1-2-500x506.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "safety_and_hygiene_hand-protection",
+          "subcategory_name": "Hand Protection",
+          "subcategory_slug": "hand-protection",
+          "subcategory_url": "https://neeyog.com/product-category/safety-hygiene-products/hand-protection/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2019/06/disposable-plastic-gloves-500x500-500x500.jpg",
+          "product_count": 6,
+          "sample_products": [
+            {
+              "product_id": "12168",
+              "product_name": "Disposable Plastic Gloves",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/hand-protection-gloves/disposable-plastic-gloves/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/disposable-plastic-gloves-500x500-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12169",
+              "product_name": "Latex Examination Gloves Powdered",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/hand-protection-gloves/latex-examination-gloves-powdered/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/latex-examination-gloves-powdered-500x500-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "12170",
+              "product_name": "Vinyl Gloves (Clear/ Blue)",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/hand-protection-gloves/vinyl-gloves-clear-blue/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2019/06/vinyl-gloves-500x500-1-500x500.jpg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "safety_and_hygiene_hand-sanitizer-stand",
+          "subcategory_name": "Hand Sanitizer Stand",
+          "subcategory_slug": "hand-sanitizer-stand",
+          "subcategory_url": "https://neeyog.com/product-category/safety-hygiene-products/hand-sanitizer-stand/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2020/06/Hand-Sanitizer-Stand-500x466.jpeg",
+          "product_count": 1,
+          "sample_products": [
+            {
+              "product_id": "16529",
+              "product_name": "Hand Sanitizer Stand Eco",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/hand-sanitizer-stand/hand-sanitizer-stand-eco/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/06/Hand-Sanitizer-Stand-500x466.jpeg",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        },
+        {
+          "subcategory_id": "safety_and_hygiene_hand-sanitizer--disinfectant",
+          "subcategory_name": "Hand Sanitizer/ Disinfectant",
+          "subcategory_slug": "hand-sanitizer--disinfectant",
+          "subcategory_url": "https://neeyog.com/product-category/safety-hygiene-products/hand-sanitizer--disinfectant/",
+          "image_url": "https://neeyog.com/wp-content/uploads/2020/05/Enviroguard-E125.png",
+          "product_count": 5,
+          "sample_products": [
+            {
+              "product_id": "16433",
+              "product_name": "Enviroguard E125 Disinfectant",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/hand-sanitizer/enviroguard-e125-disinfectant/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/05/Enviroguard-E125.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "16408",
+              "product_name": "Disinfectant Enviroguard 256",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/hand-sanitizer/disinfectant-enviroguard-256/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/05/enviroguard-256-surface-disinfectant-500x500-1.png",
+              "price": "",
+              "stock_status": "instock"
+            },
+            {
+              "product_id": "16143",
+              "product_name": "Handkleen Rub Sanitizer",
+              "product_url": "https://neeyog.com/product/safety-hygiene-products/hand-sanitizer/handkleen-rub-sanitizer/",
+              "image_url": "https://neeyog.com/wp-content/uploads/2020/05/handkleen-rub-brochure-1-500x500.png",
+              "price": "",
+              "stock_status": "instock"
+            }
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "category_id": "ps_cups",
+      "category_name": "PS Cups",
+      "category_slug": "bakery-sweet-products/mousse-products-with-lids",
+      "category_url": "https://neeyog.com/product-category/bakery-sweet-products/mousse-products-with-lids/",
+      "description": "Mouse Cups",
+      "image_url": "https://neeyog.com/wp-content/uploads/2025/02/ICE-CREAM-BOWL-12-1-scaled.jpg",
+      "total_products": 0,
+      "total_subcategories": 0,
+      "subcategories": [],
+      "is_active": true
+    },
+    {
+      "category_id": "pizza_box",
+      "category_name": "Pizza Box",
+      "category_slug": "grab-go/pizza-boxes",
+      "category_url": "https://neeyog.com/product-category/grab-go/pizza-boxes/",
+      "description": "Pizza Box",
+      "image_url": "https://neeyog.com/wp-content/uploads/2025/02/PIZZA-BOX-10.jpg",
+      "total_products": 0,
+      "total_subcategories": 0,
+      "subcategories": [],
+      "is_active": true
+    },
+    {
+      "category_id": "reusable_cups",
+      "category_name": "Reusable Cups",
+      "category_slug": "glasses/reusable-glasses",
+      "category_url": "https://neeyog.com/product-category/glasses/reusable-glasses/",
+      "description": "Poultry Products",
+      "image_url": "https://neeyog.com/wp-content/uploads/2024/09/2.jpg",
+      "total_products": 0,
+      "total_subcategories": 0,
+      "subcategories": [],
+      "is_active": true
+    },
+    {
+      "category_id": "biodegradable_cornstarch_products",
+      "category_name": "Biodegradable Cornstarch Products",
+      "category_slug": "biodegradable-cornstarch-food-packaging",
+      "category_url": "https://neeyog.com/product-category/biodegradable-cornstarch-food-packaging/",
+      "description": "biodegradable cornstarch Bowls and containers",
+      "image_url": "https://neeyog.com/wp-content/uploads/2025/01/CORNSTRACH-PRODUCT-Photoroom.jpg",
+      "total_products": 0,
+      "total_subcategories": 0,
+      "subcategories": [],
+      "is_active": true
+    },
+    {
+      "category_id": "fnv_and_butchery",
+      "category_name": "FNV & Butchery",
+      "category_slug": null,
+      "category_url": null,
+      "description": "FNV & Butchery Products",
+      "image_url": "https://neeyog.com/wp-content/uploads/2018/10/822552.jpg",
+      "total_products": 0,
+      "total_subcategories": 0,
+      "subcategories": [],
+      "is_active": false
+    },
+    {
+      "category_id": "table_roll",
+      "category_name": "Table Roll",
+      "category_slug": "table-roll",
+      "category_url": "https://neeyog.com/product-category/table-roll/",
+      "description": "Table Roll",
+      "image_url": "https://neeyog.com/wp-content/uploads/2019/01/Table-Roll.jpg",
+      "total_products": 0,
+      "total_subcategories": 0,
+      "subcategories": [],
+      "is_active": true
+    },
+    {
+      "category_id": "tissues",
+      "category_name": "Tissues",
+      "category_slug": "tissues",
+      "category_url": "https://neeyog.com/product-category/tissues/",
+      "description": "Tissues",
+      "image_url": "https://neeyog.com/wp-content/uploads/2018/10/NAP012.jpg",
+      "total_products": 0,
+      "total_subcategories": 0,
+      "subcategories": [],
+      "is_active": true
+    },
+    {
+      "category_id": "sealing_machine",
+      "category_name": "Sealing Machine",
+      "category_slug": "sealer-machine",
+      "category_url": "https://neeyog.com/product-category/sealer-machine/",
+      "description": "Sealing Machine",
+      "image_url": "https://neeyog.com/wp-content/uploads/2019/01/sealer-machine-500x500.jpg",
+      "total_products": 0,
+      "total_subcategories": 0,
+      "subcategories": [],
+      "is_active": true
+    }
+  ]
+}
