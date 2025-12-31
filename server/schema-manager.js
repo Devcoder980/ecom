@@ -35,7 +35,7 @@ const SchemaDefinitionSchema = new mongoose.Schema({
     type: {
       type: String,
       required: true,
-      enum: ['text', 'email', 'tel', 'url', 'password', 'number', 'datetime-local', 'textarea', 'select', 'checkbox', 'file', 'relationship']
+      enum: ['text', 'email', 'tel', 'url', 'password', 'number', 'datetime-local', 'textarea', 'select', 'checkbox', 'file', 'relationship', 'string', 'boolean', 'date', 'json', 'multiselect', 'richtext']
     },
     label: {
       type: String,
@@ -94,38 +94,44 @@ const SchemaDefinitionSchema = new mongoose.Schema({
 
 const SchemaDefinition = mongoose.model('SchemaDefinition', SchemaDefinitionSchema);
 
+// Helper function to convert field type to Mongoose type
+const getMongooseFieldType = (fieldType, fieldConfig = {}) => {
+  switch (fieldType) {
+    case 'string':
+    case 'text':
+    case 'email':
+    case 'tel':
+    case 'url':
+    case 'password':
+    case 'textarea':
+    case 'select':
+    case 'file':
+    case 'richtext': // Richtext stored as string (HTML/Quill format)
+      return fieldConfig.multiple ? [String] : String;
+    case 'number':
+      return Number;
+    case 'boolean':
+    case 'checkbox':
+      return Boolean;
+    case 'date':
+    case 'datetime-local':
+      return Date;
+    case 'json':
+      return mongoose.Schema.Types.Mixed;
+    case 'multiselect':
+      return [String];
+    default:
+      return mongoose.Schema.Types.Mixed;
+  }
+};
+
 // Dynamic Model Creator
 const createDynamicModel = (tableName, fields) => {
   const schemaFields = {};
   
   fields.forEach(field => {
-    let fieldType = mongoose.Schema.Types.Mixed;
-    
-    switch (field.type) {
-      case 'text':
-      case 'email':
-      case 'tel':
-      case 'url':
-      case 'password':
-      case 'textarea':
-        fieldType = String;
-        break;
-      case 'number':
-        fieldType = Number;
-        break;
-      case 'checkbox':
-        fieldType = Boolean;
-        break;
-      case 'datetime-local':
-        fieldType = Date;
-        break;
-      case 'file':
-        fieldType = field.multiple ? [String] : String;
-        break;
-      case 'select':
-        fieldType = String;
-        break;
-    }
+    const fieldConfig = field.ui || {};
+    const fieldType = getMongooseFieldType(field.type, fieldConfig);
     
     schemaFields[field.name] = {
       type: fieldType,
@@ -139,6 +145,12 @@ const createDynamicModel = (tableName, fields) => {
   schemaFields.updatedAt = { type: Date, default: Date.now };
   
   const dynamicSchema = new mongoose.Schema(schemaFields);
+  
+  // Check if model already exists, return it or create new one
+  if (mongoose.models[tableName]) {
+    return mongoose.models[tableName];
+  }
+  
   return mongoose.model(tableName, dynamicSchema);
 };
 
@@ -191,6 +203,12 @@ const updateSchema = async (id, updateData) => {
     
     if (!schema) {
       throw new Error('Schema not found');
+    }
+    
+    // Delete existing model if it exists to avoid "Cannot overwrite model" error
+    if (mongoose.models[schema.tableName]) {
+      delete mongoose.models[schema.tableName];
+      delete mongoose.connection.models[schema.tableName];
     }
     
     // Recreate the model with updated fields
@@ -367,6 +385,7 @@ const getDynamicModel = async (tableName) => {
 export {
   SchemaDefinition,
   createDynamicModel,
+  getMongooseFieldType,
   getAllSchemas,
   getSchemaByTable,
   createSchema,

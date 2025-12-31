@@ -44,7 +44,8 @@ import {
   updateSchema, 
   deleteSchema,
   generateSchemaFile,
-  getDynamicModel
+  getDynamicModel,
+  getMongooseFieldType
 } from './schema-manager.js';
 
 // 🔗 MongoDB connection
@@ -626,7 +627,6 @@ app.post("/api/upload-multiple", async (req, res) => {
 app.post("/api/:collection/upload", async (req, res) => {
   try {
     const { collection } = req.params;
-    const { fieldName, recordId } = req.body;
     
     const uploadMiddleware = upload.any();
     
@@ -634,6 +634,9 @@ app.post("/api/:collection/upload", async (req, res) => {
       if (err) {
         return res.status(400).json({ error: err.message });
       }
+      
+      // Extract fieldName and recordId AFTER middleware processes the request
+      const { fieldName, recordId } = req.body;
       
       console.log(`📁 File upload for ${collection}:`);
       console.log('📄 Body:', req.body);

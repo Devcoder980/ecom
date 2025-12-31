@@ -1,0 +1,65 @@
+{
+ 
+    "categories": [
+      {
+        "id": 1,
+        "category_id": "bakery_and_sweet",
+        "name": "Bakery & Sweet",
+        "slug": "bakery-sweet-products",
+        "url": "https://neeyog.com/product-category/bakery-sweet-products/",
+        "description": "Bakery & Sweet Products",
+        "image_url": "https://neeyog.com/wp-content/uploads/2019/01/IMG-20160723-WA0092.jpg",
+        "display_order": 1,
+        "is_active": true,
+        "created_at": "2025-10-11T15:19:03.871190"
+      }
+    ],
+    "subcategories": [
+      {
+        "id": 1,
+        "subcategory_id": "bakery_and_sweet_mousse-products-with-lids",
+        "category_id": "bakery_and_sweet",
+        "name": "Mousse Products With Lids",
+        "slug": "mousse-products-with-lids",
+        "url": "https://neeyog.com/product-category/bakery-sweet-products/mousse-products-with-lids/",
+        "image_url": "https://neeyog.com/wp-content/uploads/2019/06/PS-1-100ML-500x365.jpg",
+        "display_order": 1,
+        "is_active": true,
+        "created_at": "2025-10-11T15:19:03.871233"
+      }
+    ],
+    "products": [
+      {
+        "id": 1,
+        "product_id": "12317",
+        "category_id": "bakery_and_sweet",
+        "subcategory_id": "bakery_and_sweet_mousse-products-with-lids",
+        "name": "PS 1 100ML With Lid",
+        "slug": "ps-1-100ml",
+        "url": "https://neeyog.com/product/bakery-sweet-products/mousse-products-with-lids/ps-1-100ml/",
+        "description": {
+          "html": "",
+          "text": "",
+          "features": [],
+          "utility": null
+        },
+        "images": {
+          "main": "https://neeyog.com/wp-content/uploads/2019/06/PS-1-100ML-500x365.jpg",
+          "large": "https://neeyog.com/wp-content/uploads/2019/06/PS-1-100ML.jpg",
+          "thumbnail": "https://neeyog.com/wp-content/uploads/2019/06/PS-1-100ML-100x100.jpg",
+          "srcset": "https://neeyog.com/wp-content/uploads/2019/06/PS-1-100ML-500x365.jpg 500w, https://neeyog.com/wp-content/uploads/2019/06/PS-1-100ML-150x109.jpg 150w, https://neeyog.com/wp-content/uploads/2019/06/PS-1-100ML-300x219.jpg 300w, https://neeyog.com/wp-content/uploads/2019/06/PS-1-100ML.jpg 591w",
+          "width": "591",
+          "height": "431"
+        },
+        "price": "",
+        "stock_status": "instock",
+        "tags": [],
+        "metadata": {
+          "product_type": "simple",
+          "quote_enabled": true,
+          "quote_id": null
+        },
+        "scraped_at": "2025-10-11T11:03:55.025830"
+      }
+    ]
+  }

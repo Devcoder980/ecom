@@ -647,6 +647,103 @@ body {
   font-size: 0.9rem;
 }
 
+/* Quill Editor Styling */
+.quill-wrapper {
+  @apply w-full;
+}
+
+.quill-wrapper .ql-container {
+  @apply min-h-[200px] border border-gray-300 rounded-b-md;
+  font-family: inherit;
+}
+
+.quill-wrapper .ql-toolbar {
+  @apply border border-gray-300 rounded-t-md bg-gray-50;
+}
+
+.quill-wrapper .ql-editor {
+  @apply min-h-[200px] text-gray-900;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.quill-wrapper .ql-editor.ql-blank::before {
+  @apply text-gray-400 italic;
+}
+
+.quill-wrapper .ql-editor p,
+.quill-wrapper .ql-editor ol,
+.quill-wrapper .ql-editor ul,
+.quill-wrapper .ql-editor pre,
+.quill-wrapper .ql-editor blockquote,
+.quill-wrapper .ql-editor h1,
+.quill-wrapper .ql-editor h2,
+.quill-wrapper .ql-editor h3,
+.quill-wrapper .ql-editor h4,
+.quill-wrapper .ql-editor h5,
+.quill-wrapper .ql-editor h6 {
+  margin-bottom: 0.5rem;
+}
+
+.quill-wrapper .ql-editor h1 { font-size: 2em; font-weight: bold; }
+.quill-wrapper .ql-editor h2 { font-size: 1.5em; font-weight: bold; }
+.quill-wrapper .ql-editor h3 { font-size: 1.17em; font-weight: bold; }
+.quill-wrapper .ql-editor h4 { font-size: 1em; font-weight: bold; }
+.quill-wrapper .ql-editor h5 { font-size: 0.83em; font-weight: bold; }
+.quill-wrapper .ql-editor h6 { font-size: 0.67em; font-weight: bold; }
+
+.quill-wrapper .ql-editor ul,
+.quill-wrapper .ql-editor ol {
+  padding-left: 1.5em;
+}
+
+.quill-wrapper .ql-editor blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic text-gray-700;
+}
+
+.quill-wrapper .ql-editor code {
+  @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+}
+
+.quill-wrapper .ql-editor pre {
+  @apply bg-gray-100 p-3 rounded overflow-x-auto;
+}
+
+.quill-wrapper .ql-editor img {
+  @apply max-w-full h-auto rounded;
+}
+
+.quill-wrapper .ql-editor a {
+  @apply text-blue-600 underline;
+}
+
+/* Make Quill toolbar buttons more visible */
+.quill-wrapper .ql-toolbar button:hover,
+.quill-wrapper .ql-toolbar button:focus,
+.quill-wrapper .ql-toolbar button.ql-active {
+  @apply bg-blue-100;
+}
+
+.quill-wrapper .ql-toolbar .ql-stroke {
+  stroke: #374151;
+}
+
+.quill-wrapper .ql-toolbar .ql-fill {
+  fill: #374151;
+}
+
+.quill-wrapper .ql-toolbar button:hover .ql-stroke,
+.quill-wrapper .ql-toolbar button:focus .ql-stroke,
+.quill-wrapper .ql-toolbar button.ql-active .ql-stroke {
+  stroke: #2563eb;
+}
+
+.quill-wrapper .ql-toolbar button:hover .ql-fill,
+.quill-wrapper .ql-toolbar button:focus .ql-fill,
+.quill-wrapper .ql-toolbar button.ql-active .ql-fill {
+  fill: #2563eb;
+}
+
 /* Responsive Form */
 @media (max-width: 768px) {
   .modal {
@@ -659,5 +756,13 @@ body {
   .form-textarea,
   .form-select {
     font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .quill-wrapper .ql-toolbar {
+    @apply text-sm;
+  }
+
+  .quill-wrapper .ql-editor {
+    @apply text-sm;
   }
 }

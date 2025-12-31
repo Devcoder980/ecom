@@ -22,6 +22,8 @@ interface SchemaField {
   relationshipDisplayField?: string;
   relationshipSearchable?: boolean;
   relationshipMultiple?: boolean;
+  // Quill editor configuration
+  useQuill?: boolean;
 }
 
 interface SchemaDefinition {
@@ -178,7 +180,8 @@ const SchemaManager: React.FC = () => {
         relationshipTable: '',
         relationshipDisplayField: '',
         relationshipSearchable: false,
-        relationshipMultiple: false
+        relationshipMultiple: false,
+        useQuill: false
       }]
     }));
   };
@@ -479,6 +482,7 @@ const SchemaManager: React.FC = () => {
                               <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Placeholder</th>
                               <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Default</th>
                               <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Accept</th>
+                              <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Use Quill</th>
                               <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rel. Table</th>
                               <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Display Field</th>
                               <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Searchable</th>
@@ -554,6 +558,19 @@ const SchemaManager: React.FC = () => {
                                     onChange={(e) => updateField(index, { accept: e.target.value })}
                                     className="form-input text-sm w-full"
                                   />
+                                </td>
+                                <td className="px-3 py-2 text-center">
+                                  {field.type === 'textarea' ? (
+                                    <input
+                                      type="checkbox"
+                                      checked={field.useQuill || false}
+                                      onChange={(e) => updateField(index, { useQuill: e.target.checked })}
+                                      className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                                      title="Enable rich text editor (Quill)"
+                                    />
+                                  ) : (
+                                    <span className="text-gray-400">-</span>
+                                  )}
                                 </td>
                                 <td className="px-3 py-2">
                                   {field.type === 'relationship' ? (

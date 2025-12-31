@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FileUploadStatus from './FileUploadStatus';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface SchemaField {
   type: string;
@@ -22,6 +24,8 @@ interface SchemaField {
   relationshipDisplayField?: string;
   relationshipSearchable?: boolean;
   relationshipMultiple?: boolean;
+  // Quill editor configuration
+  useQuill?: boolean;
 }
 
 interface TableSchema {
@@ -51,6 +55,36 @@ const TableManager: React.FC = () => {
   const [relationshipSearchTerms, setRelationshipSearchTerms] = useState<{ [key: string]: string }>({});
   const [uploadErrors, setUploadErrors] = useState<{ [key: string]: string }>({});
   const [uploadSuccess, setUploadSuccess] = useState<{ [key: string]: boolean }>({});
+
+  // Quill editor modules configuration
+  const quillModules = {
+    toolbar: [
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      [{ 'font': [] }],
+      [{ 'size': ['small', false, 'large', 'huge'] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'indent': '-1' }, { 'indent': '+1' }],
+      [{ 'align': [] }],
+      ['blockquote', 'code-block'],
+      ['link', 'image', 'video'],
+      ['clean']
+    ]
+  };
+
+  const quillFormats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike',
+    'color', 'background',
+    'script',
+    'list', 'bullet',
+    'indent',
+    'align',
+    'blockquote', 'code-block',
+    'link', 'image', 'video'
+  ];
 
   useEffect(() => {
     fetchTables();
@@ -383,6 +417,26 @@ const TableManager: React.FC = () => {
         );
 
       case 'textarea':
+        // Use Quill editor if useQuill is enabled
+        if (field.useQuill) {
+          return (
+            <div className="quill-wrapper">
+              <ReactQuill
+                theme="snow"
+                value={value || ''}
+                onChange={(content) => setFormData((prev: any) => ({ ...prev, [fieldName]: content }))}
+                modules={quillModules}
+                formats={quillFormats}
+                placeholder={field.placeholder || 'Enter content...'}
+                className="bg-white"
+              />
+              {field.required && !value && (
+                <p className="mt-1 text-xs text-red-500">This field is required</p>
+              )}
+            </div>
+          );
+        }
+        // Default textarea for non-Quill fields
         return (
           <textarea
             value={value}
